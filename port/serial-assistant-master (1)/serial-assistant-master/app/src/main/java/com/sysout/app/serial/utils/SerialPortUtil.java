@@ -1,14 +1,13 @@
-package com.thfw.robotheart.util;
+package com.sysout.app.serial.utils;
 
-import android.serialport.SerialPort;
 import android.text.TextUtils;
+import android.util.Log;
 
-import com.thfw.base.utils.LogUtil;
-import com.vi.vioserial.COMSerial;
-import com.vi.vioserial.NormalSerial;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.IntBuffer;
 import java.util.Arrays;
 
 /**
@@ -29,46 +28,6 @@ public class SerialPortUtil {
 
 
     /**
-     * 打开串口
-     *
-     * @return 0：打开串口成功
-     * -1：无法打开串口：没有串口读/写权限！
-     * -2：无法打开串口：未知错误！
-     * -3：无法打开串口：参数错误！
-     */
-    public static void open() {
-        open(PORT_NAME, IBAUDTATE);
-    }
-
-
-    public static int open(String portStr, int ibaudRate) {
-        SerialPort.setSuPath("/system/bin/su");
-        LogUtil.d(TAG, "portStr = " + portStr + ", ibaudRate = " + ibaudRate);
-        int openCode = NormalSerial.instance().open(portStr, ibaudRate);
-        LogUtil.d(TAG, "串口打开：" + openCode);
-        return openCode;
-    }
-
-    /**
-     * 发送数据
-     *
-     * @param order
-     * @param arrayBytes
-     */
-    public static String sendOrder(int order, byte... arrayBytes) {
-        /**
-         * 注意发送的数据类型为hex，字符串需要转成hex在发送
-         * 转换方法：SerialDataUtils.stringToHexString(String s)
-         * @param portStr 串口号（即需要往哪个串口发送数据）
-         * @param hexData 发送的数据
-         */
-        String sendData = getSendData(order, arrayBytes);
-        LogUtil.d(TAG, "sendData -> " + sendData);
-        COMSerial.instance().sendHex(PORT_NAME, sendData);
-        return sendData;
-    }
-
-    /**
      * 构建协议
      *
      * @param order      命令
@@ -80,31 +39,139 @@ public class SerialPortUtil {
         stringBuffer.append(SerialDataUtils.Int2Hex(HEAD));
         stringBuffer.append(SerialDataUtils.Int2Hex(order));
         // 写入数据按小端处理（4660 0x1234 -> 0x34 0x12）
+        IntBuffer intBuffer = IntBuffer.allocate(100);
+
         ByteBuffer bb = ByteBuffer.allocate(100);
         bb.order(ByteOrder.LITTLE_ENDIAN);
         bb.put(arrayBytes);
         // 读取
         bb.flip();
         int limit = bb.limit();
-        LogUtil.d(TAG, "limit -> " + limit);
+        Log.d(TAG, "limit -> " + limit);
         stringBuffer.append(SerialDataUtils.Int2Hex(limit));
+        stringBuffer.append(SerialDataUtils.Int2Hex(0));
 
         int count = HEAD_BIT_COUNT + order + limit;
         while (bb.position() < limit) {
             String byte2Hex = SerialDataUtils.Byte2Hex(Byte.valueOf(bb.get()));
             stringBuffer.append(byte2Hex);
-            LogUtil.d(TAG, "byte2Hex -> " + byte2Hex);
+            Log.d(TAG, "byte2Hex -> " + byte2Hex);
             int bitCount = Integer.parseInt(byte2Hex, 16);
-            LogUtil.d(TAG, "bitCount -> " + bitCount);
+            Log.d(TAG, "bitCount -> " + bitCount);
             count = count + bitCount;
 
         }
-        LogUtil.d(TAG, "count -> " + count);
+        Log.d(TAG, "count -> " + count);
         int checkBitInt = count % 256;
-        LogUtil.d(TAG, "checkBitInt -> " + checkBitInt);
+        Log.d(TAG, "checkBitInt -> " + checkBitInt);
         stringBuffer.append(SerialDataUtils.Int2Hex(checkBitInt));
-        LogUtil.d(TAG, "send final -> " + stringBuffer.toString());
+        Log.d(TAG, "send final -> " + stringBuffer.toString());
         return stringBuffer.toString();
+    }
+
+    /**
+     * 构建协议
+     *
+     * @param order      命令
+     * @param arrayBytes 参数
+     * @return
+     */
+    public static String getSendData(int order, int... arrayBytes) {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(SerialDataUtils.Int2Hex(HEAD));
+        stringBuffer.append(SerialDataUtils.Int2Hex(order));
+        // 写入数据按小端处理（4660 0x1234 -> 0x34 0x12）
+        ByteBuffer bb = ByteBuffer.allocate(1000);
+        bb.order(ByteOrder.LITTLE_ENDIAN);
+        Order mOrder = Order.getOrderMap().get(order);
+        if (mOrder == null) {
+            LogUtils.d(TAG, "不支持order = " + order);
+            return "不支持该指令";
+        }
+        if (order == Order.UP_STATE) {
+            int msgType = arrayBytes[0];
+            switch (msgType) {
+                case 1:
+                    mOrder.paramsLens = new int[]{1, 2, 2};
+                    break;
+                case 2:
+                    mOrder.paramsLens = new int[]{1, 2, 1, 1, 1, 1};
+                    break;
+                case 3:
+                    mOrder.paramsLens = new int[]{1, 2, 1};
+                    break;
+                case 4:
+                    mOrder.paramsLens = new int[]{1, 2, 4, 4, 4};
+                    break;
+            }
+        }
+        for (int i = 0; i < arrayBytes.length; i++) {
+            if (i < mOrder.paramsLens.length) {
+                if (mOrder.paramsLens[i] == 1) {
+                    bb.put((byte) arrayBytes[i]);
+                } else {
+                    LogUtils.d(TAG, "Int2Bytes_LE = " + Arrays.toString(ByteConvert.Int2Bytes_LE(arrayBytes[i])));
+                    byte[] src = ByteConvert.Int2Bytes_LE(arrayBytes[i]);
+                    if (src != null && src.length >= mOrder.paramsLens[i]) {
+                        bb.put(src, 0, mOrder.paramsLens[i]);
+                    } else {
+                        byte[] newSrc = new byte[mOrder.paramsLens[i]];
+                        bb.put(newSrc);
+                    }
+                }
+            }
+        }
+
+        // 读取
+        bb.flip();
+        int limit = bb.limit();
+        Log.d(TAG, "limit -> " + limit);
+
+        stringBuffer.append(SerialDataUtils.Int2Hex(mOrder.len));
+        stringBuffer.append(SerialDataUtils.Int2Hex(0));
+
+        int count = HEAD_BIT_COUNT + order + limit;
+        while (bb.position() < limit) {
+            String byte2Hex = SerialDataUtils.Byte2Hex(Byte.valueOf(bb.get()));
+            stringBuffer.append(byte2Hex);
+            Log.d(TAG, "byte2Hex -> " + byte2Hex);
+            int bitCount = Integer.parseInt(byte2Hex, 16);
+            Log.d(TAG, "bitCount -> " + bitCount);
+            count = count + bitCount;
+
+        }
+        Log.d(TAG, "count -> " + count);
+        int checkBitInt = count % 256;
+        Log.d(TAG, "checkBitInt -> " + checkBitInt);
+        stringBuffer.append(SerialDataUtils.Int2Hex(checkBitInt));
+        Log.d(TAG, "send final -> " + stringBuffer.toString());
+        return stringBuffer.toString();
+    }
+
+    /**
+     * @param: [hex]
+     * @return: int
+     * @description: 按位计算，位值乘权重
+     */
+    public static int hexToDecimal(String hex) {
+        int outcome = 0;
+        for (int i = 0; i < hex.length(); i++) {
+            char hexChar = hex.charAt(i);
+            outcome = outcome * 16 + charToDecimal(hexChar);
+        }
+        return outcome;
+    }
+
+    /**
+     * @param: [c]
+     * @return: int
+     * @description:将字符转化为数字
+     */
+    public static int charToDecimal(char c) {
+        if (c >= 'A' && c <= 'F')
+            return 10 + c - 'A';
+        else
+            return c - '0';
     }
 
     /**
@@ -113,35 +180,62 @@ public class SerialPortUtil {
      * @param data
      */
     public static void parseOrder(String data) {
-        LogUtil.d(TAG, "parseOrder - data -> " + data);
+        Log.d(TAG, "parseOrder - data -> " + data);
+        if (TextUtils.isEmpty(data)) {
+            Log.d(TAG, "parseOrder - data -> null");
+            return;
+        }
+        data = data.replaceAll(" ", "");
         if (TextUtils.isEmpty(data) || !data.startsWith(HEAD_STR)) {
-            LogUtil.d(TAG, "parseOrder - data -> 数据不合法");
+            Log.d(TAG, "parseOrder - data -> 数据不合法");
             return;
         }
         data = data.replace(HEAD_STR, "");
         byte[] bytes = SerialDataUtils.HexToByteArr2(data);
 
         String orderHex = SerialDataUtils.Byte2Hex(Byte.valueOf(bytes[0]));
-        LogUtil.d(TAG, "parseOrder - orderHex -> " + orderHex);
+        Log.d(TAG, "parseOrder - orderHex -> " + orderHex);
         int order = Integer.parseInt(orderHex, 16);
-        LogUtil.d(TAG, "parseOrder - order -> " + order);
-
+        Log.d(TAG, "parseOrder - order -> " + order);
+        Order mOrder = Order.getOrderMap().get(order);
+        if (mOrder == null) {
+            // 处理数据
+            onHandleOrder(order, new int[]{});
+            return;
+        }
         String lenHex = SerialDataUtils.Byte2Hex(Byte.valueOf(bytes[1]));
-        LogUtil.d(TAG, "parseOrder - lenHex -> " + lenHex);
+        Log.d(TAG, "parseOrder - lenHex -> " + lenHex);
         int len = Integer.parseInt(lenHex, 16);
-        LogUtil.d(TAG, "parseOrder - len -> " + len);
+        Log.d(TAG, "parseOrder - len -> " + len);
 
-        int contentLen = len + 2;
-        int[] byteContents = new int[len];
-        for (int contentBegin = 2; contentBegin < contentLen; contentBegin++) {
-            String hex = SerialDataUtils.Byte2Hex(Byte.valueOf(bytes[contentBegin]));
-            int hexInt = Integer.parseInt(hex, 16);
-            LogUtil.d(TAG, "parseOrder - hex -> " + hex);
-            LogUtil.d(TAG, "parseOrder - hexInt -> " + hexInt);
-            byteContents[contentBegin - 2] = hexInt;
+        byte[] newBytes = Arrays.copyOfRange(bytes, 3, bytes.length);
+        if (order == Order.UP_STATE) {
+            int msgType = newBytes[0];
+            Log.d(TAG, "parseOrder - msgType -> " + msgType);
+            switch (msgType) {
+                case 1:
+                    mOrder.paramsLens = new int[]{1, 2, 2};
+                    break;
+                case 2:
+                    mOrder.paramsLens = new int[]{1, 2, 1, 1, 1, 1};
+                    break;
+                case 3:
+                    mOrder.paramsLens = new int[]{1, 2, 1};
+                    break;
+                case 4:
+                    mOrder.paramsLens = new int[]{1, 2, 4, 4, 4};
+                    break;
+            }
+        }
+        int[] intContents = new int[mOrder.paramsLens.length];
+        int from = 0;
+        for (int i = 0; i < mOrder.paramsLens.length; i++) {
+            byte[] byteNumbers = Arrays.copyOf(Arrays.copyOfRange(newBytes, from, from + mOrder.paramsLens[i]), 4);
+            intContents[i] = ByteConvert.Bytes2Int_LE(byteNumbers);
+            from += mOrder.paramsLens[i];
         }
         // 处理数据
-        onHandleOrder(order, byteContents);
+        onHandleOrder(order, intContents);
     }
 
     private static ParseDataListener parseDataListener;
@@ -164,8 +258,8 @@ public class SerialPortUtil {
         if (parseDataListener != null) {
             parseDataListener.onHandleOrder(order, bytes);
         }
-        LogUtil.d(TAG, "onHandleOrder - order -> " + order);
-        LogUtil.d(TAG, "onHandleOrder - bytes -> " + Arrays.toString(bytes));
+        Log.d(TAG, "onHandleOrder - order -> " + order);
+        Log.d(TAG, "onHandleOrder - bytes -> " + Arrays.toString(bytes));
         switch (order) {
             case Order.DOWN_LAMP_STATE:
                 break;
@@ -187,40 +281,5 @@ public class SerialPortUtil {
         }
     }
 
-
-    /**
-     * 命令标识
-     * 标识符 方向 功能描述
-     * 1 -- 0x80 s -> r 上报所有状态信息
-     * 2 -- 0x81 s -> r 上报电量
-     * 3 -- 0x82 s -> r 上报按键转态
-     * 4 -- 0x83 s -> r 上报红外接近状态
-     * 5 -- 0xA0 s <- r 所有状态信息查询
-     * 6 -- 0xA1 s <- r 舵机控制
-     * 7 -- 0xA2 s <- r 指示灯控制
-     * 8 -- 0xA3 s <- r 红外检测控制
-     */
-    public static class Order {
-
-        // 上报所有状态信息
-        public static final short UP_STATE = 128; // 0x80
-        // 上报电量
-        public static final short UP_ELECTRICITY_STATE = 129; // 0x81
-        // 上报按键转态
-        public static final short UP_BUTTON_STATE = 130; // 0x82
-        // 上报红外接近状态
-        public static final short UP_RED_ULTRA_STATE = 131; // 0x83
-
-        // 所有状态信息查询
-        public static final short DOWN_STATE = 160; // 0xA0
-        // 舵机控制
-        public static final short DOWN_SERVO_STATE = 161; // 0xA1
-        // 指示灯控制
-        public static final short DOWN_LAMP_STATE = 162; // 0xA2
-        // 红外检测控制
-        public static final short DOWN_RED_ULTRA_STATE = 163; // 0xA3
-
-
-    }
 
 }

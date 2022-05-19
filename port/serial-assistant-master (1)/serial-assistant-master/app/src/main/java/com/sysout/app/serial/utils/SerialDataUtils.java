@@ -1,4 +1,4 @@
-package com.thfw.robotheart.util;
+package com.sysout.app.serial.utils;
 
 /**
  * 数据转换工具类
