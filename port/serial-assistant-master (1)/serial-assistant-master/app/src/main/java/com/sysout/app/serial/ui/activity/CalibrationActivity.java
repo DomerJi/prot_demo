@@ -119,11 +119,11 @@ public class CalibrationActivity extends AppCompatActivity {
     private void initShake() {
 
         mBtShakeLeft.setOnClickListener(v -> {
-            send(0, Order.DOWN_STATE, 0);
+            send(0, Order.DOWN_STATE, 4);
         });
 
         mBtShakeRight.setOnClickListener(v -> {
-            send(1, Order.DOWN_STATE, 0);
+            send(1, Order.DOWN_STATE, 4);
         });
 
         mBtShakeCalibration.setOnClickListener(v -> {
@@ -174,11 +174,11 @@ public class CalibrationActivity extends AppCompatActivity {
     private void initNod() {
 
         mBtNodLeft.setOnClickListener(v -> {
-            send(5, Order.DOWN_STATE, 0);
+            send(5, Order.DOWN_STATE, 4);
         });
 
         mBtNodRight.setOnClickListener(v -> {
-            send(6, Order.DOWN_STATE, 0);
+            send(6, Order.DOWN_STATE, 4);
         });
 
         mBtNodCalibration.setOnClickListener(v -> {
@@ -316,29 +316,30 @@ public class CalibrationActivity extends AppCompatActivity {
 
                                 switch (order) {
                                     case Order.UP_STATE:
-                                        if (bytes.length == 11) {
+                                        // 查询舵机角度 1，2，4，4，4 状态|故障位|1号舵机|2号舵机|3号舵机
+                                        if (bytes.length == 5 && bytes[0] == 4) {
 
                                             // 摇头舵机 左右极限位
                                             if (getIndex == 0) {
-                                                float angle = bytes[9] / 10f;
+                                                float angle = bytes[3] / 10f;
                                                 mTvShakeLeftValue.setText(getPeople(angle) + "度");
-                                                getsHakeLeftMax = bytes[9];
+                                                getsHakeLeftMax = bytes[3];
                                                 mCheckMap.put(getIndex, true);
                                             } else if (getIndex == 1) {
-                                                float angle = bytes[9] / 10f;
+                                                float angle = bytes[3] / 10f;
                                                 mTvShakeRightValue.setText(getPeople(angle) + "度");
-                                                getsHakeRightMax = bytes[9];
+                                                getsHakeRightMax = bytes[3];
                                                 mCheckMap.put(getIndex, true);
                                                 // 点头舵机 上下极限位
                                             } else if (getIndex == 5) {
-                                                float angle = bytes[8] / 10f;
+                                                float angle = bytes[2] / 10f;
                                                 mTvNodLeftValue.setText(getPeople(angle) + "度");
-                                                getNodLeftMax = bytes[8];
+                                                getNodLeftMax = bytes[2];
                                                 mCheckMap.put(getIndex, true);
                                             } else if (getIndex == 6) {
-                                                float angle = bytes[8] / 10f;
+                                                float angle = bytes[2] / 10f;
                                                 mTvNodRightValue.setText(getPeople(angle) + "度");
-                                                getNodRightMax = bytes[8];
+                                                getNodRightMax = bytes[2];
                                                 mCheckMap.put(getIndex, true);
                                             }
                                         }

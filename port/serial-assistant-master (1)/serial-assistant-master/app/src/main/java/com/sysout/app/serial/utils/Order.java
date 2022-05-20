@@ -30,18 +30,21 @@ public class Order {
     public static HashMap<Integer, Order> getOrderMap() {
         if (orderMap == null) {
             orderMap = new HashMap<>();
-            // 2,2,(1,1,1,1),1,(4,4,4)
-            orderMap.put(UP_STATE, new Order(UP_STATE, 1, 2, 2, 1, 1, 1, 1, 1, 4, 4, 4));
+            // 1,2,2,(1,1,1,1),1,1,(4,4,4)
+            orderMap.put(UP_STATE, new Order(UP_STATE, 1, 2, 2, 1, 1, 1, 1, 1, 1, 4, 4, 4));
             orderMap.put(UP_ELECTRICITY_STATE, new Order(UP_ELECTRICITY_STATE, 2));
             orderMap.put(UP_BUTTON_STATE, new Order(UP_BUTTON_STATE, 1, 1));
             orderMap.put(UP_RED_ULTRA_STATE, new Order(UP_RED_ULTRA_STATE, 1));
             orderMap.put(UP_RSERVO_STATE, new Order(UP_RSERVO_STATE, 1, 4));
+            orderMap.put(UP_ADAPTER_STATE, new Order(UP_ADAPTER_STATE, 1));
+
             orderMap.put(DOWN_STATE, new Order(DOWN_STATE, 1));
             orderMap.put(DOWN_SERVO_STATE, new Order(DOWN_SERVO_STATE, 1, 4, 4));
             orderMap.put(DOWN_LAMP_STATE, new Order(DOWN_LAMP_STATE, 1, 1));
             orderMap.put(DOWN_RED_ULTRA_STATE, new Order(DOWN_RED_ULTRA_STATE, 1));
             orderMap.put(DOWN_FACTORY_STATE, new Order(DOWN_FACTORY_STATE, 1));
             orderMap.put(DOWN_ELECTRICITY_STATE, new Order(DOWN_ELECTRICITY_STATE, 1));
+
 
         }
         return orderMap;
@@ -70,7 +73,7 @@ public class Order {
         String info = null;
         switch (cmd) {
             case UP_STATE:
-                info = "上报状态信息(21字节)";
+                info = "上报状态信息(23字节)";
                 options[0] = new Option("类型")
                         .add("所有", 0)
                         .add("电压", 1)
@@ -103,7 +106,11 @@ public class Order {
                         .add("有人接近", 1)
                         .add("无人接近", 0);
 
-                options[8] = new Option("舵机一")
+                options[8] = new Option("适配器状态")
+                        .add("充电", 1)
+                        .add("未充电", 0);
+
+                options[9] = new Option("舵机一")
                         .add("-700(-70度)", -700)
                         .add("-500(-50度)", -500)
                         .add("-300(-30度)", -300)
@@ -115,7 +122,7 @@ public class Order {
                         .add("500(50度)", 500)
                         .add("700(70度)", 700);
 
-                options[9] = new Option("舵机二")
+                options[10] = new Option("舵机二")
                         .add("-700(-70度)", -700)
                         .add("-500(-50度)", -500)
                         .add("-300(-30度)", -300)
@@ -127,7 +134,7 @@ public class Order {
                         .add("500(50度)", 500)
                         .add("700(70度)", 700);
 
-                options[10] = new Option("舵机三")
+                options[11] = new Option("舵机三")
                         .add("-700(-70度)", -700)
                         .add("-500(-50度)", -500)
                         .add("-300(-30度)", -300)
@@ -185,6 +192,13 @@ public class Order {
                         .add("300(30度)", 300)
                         .add("500(50度)", 500)
                         .add("700(70度)", 700);
+                break;
+            case UP_ADAPTER_STATE:
+                info = "上报适配器状态(1字节)";
+                options[0] = new Option("适配器状态")
+                        .add("充电", 1)
+                        .add("未充电", 0);
+
                 break;
             case DOWN_STATE:
                 info = "状态信息查询(1字节)";
@@ -320,6 +334,9 @@ public class Order {
     public static final int UP_RED_ULTRA_STATE = 131; // 0x83
     // 上报舵机角度
     public static final int UP_RSERVO_STATE = 132; // 0x84
+    // 上报适配器状态
+    public static final int UP_ADAPTER_STATE = 133; // 0x85
+
 
     // 所有状态信息查询
     public static final int DOWN_STATE = 160; // 0xA0

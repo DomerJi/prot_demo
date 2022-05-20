@@ -103,6 +103,9 @@ public class SerialPortUtil {
                 case 4:
                     mOrder.paramsLens = new int[]{1, 2, 4, 4, 4};
                     break;
+                case 5:
+                    mOrder.paramsLens = new int[]{1, 2, 1};
+                    break;
             }
         }
         for (int i = 0; i < arrayBytes.length; i++) {
@@ -224,6 +227,9 @@ public class SerialPortUtil {
                     break;
                 case 4:
                     mOrder.paramsLens = new int[]{1, 2, 4, 4, 4};
+                    break;
+                case 5:
+                    mOrder.paramsLens = new int[]{1, 2, 1};
                     break;
             }
         }

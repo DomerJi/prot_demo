@@ -349,6 +349,22 @@
                 android:textColorHint="@color/gray"
                 android:textSize="@dimen/textSize" />
 
+            <EditText
+                android:id="@+id/et_code12"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@color/white"
+                android:hint="@string/info_hint_please_input"
+                android:inputType="number"
+                android:maxLength="6"
+                android:minWidth="65dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/textSize" />
+
             <TextView
                 android:id="@+id/tv_codes_info"
                 android:layout_width="wrap_content"
@@ -485,6 +501,15 @@
 
             <Button
                 android:id="@+id/bt_sel11"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:text="选择"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/bt_sel12"
                 android:layout_width="65dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
