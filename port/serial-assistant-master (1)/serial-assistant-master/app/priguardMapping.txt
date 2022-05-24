@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.1.86
 # min_api: 19
-# pg_map_id: 9f1f502
+# pg_map_id: 011b232
 # common_typos_disable
 com.afollestad.date.CalendarsKt -> com.afollestad.date.a:
     java.util.Calendar decrementMonth(java.util.Calendar) -> a
@@ -2263,11 +2263,12 @@ com.sysout.app.serial.ui.activity.PortTestActivity -> com.sysout.app.serial.ui.a
     android.widget.EditText mEtCode03 -> i
     android.widget.EditText mEtCode09 -> H
     android.widget.EditText mEtCode01 -> g
+    android.widget.Button mBtSel11 -> P
     android.widget.EditText mEtCode05 -> k
-    android.widget.Button mBtSel10 -> N
+    android.widget.Button mBtSel09 -> N
     android.widget.Button mBtSelOrder -> s
     android.widget.Button mBtSend -> m
-    android.widget.Button mBtSel08 -> L
+    android.widget.Button mBtSel07 -> L
     android.widget.TextView mTvCodesInfo -> E
     android.widget.Button mBtBack -> a
     android.widget.TextView mTvOpenStatusHint -> f
@@ -2285,11 +2286,12 @@ com.sysout.app.serial.ui.activity.PortTestActivity -> com.sysout.app.serial.ui.a
     android.widget.Button mBtSel05 -> z
     android.widget.EditText mEtCode08 -> G
     android.widget.Button[] btSels -> C
+    android.widget.Button mBtSel12 -> Q
     android.widget.EditText mEtCode06 -> l
-    android.widget.Button mBtSel11 -> O
+    android.widget.Button mBtSel10 -> O
+    android.widget.EditText mEtCode12 -> K
     android.widget.EditText mEtOrder -> p
-    android.widget.Button mBtSel09 -> M
-    android.widget.Button mBtSel07 -> K
+    android.widget.Button mBtSel08 -> M
     android.widget.EditText[] editTexts -> B
     android.widget.TextView mTvOderInfo -> D
     android.widget.Button mBtSel06 -> A

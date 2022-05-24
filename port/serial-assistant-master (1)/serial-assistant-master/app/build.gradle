@@ -17,8 +17,8 @@ android {
         applicationId "com.sysout.app"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 116
-        versionName "1.2.6"
+        versionCode 117
+        versionName "1.2.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

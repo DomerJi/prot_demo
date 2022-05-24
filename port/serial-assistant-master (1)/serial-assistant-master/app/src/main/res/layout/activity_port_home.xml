@@ -45,6 +45,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:weightSum="2">
 
         <Button
@@ -80,7 +81,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:layout_weight="1"
-            android:text="host01" />
+            android:text="host 模式"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/echo_peripheral01"
@@ -88,7 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_weight="1"
-            android:text="peripheral01" />
+            android:text="device 模式"
+            android:textAllCaps="false" />
 
     </LinearLayout>
 
