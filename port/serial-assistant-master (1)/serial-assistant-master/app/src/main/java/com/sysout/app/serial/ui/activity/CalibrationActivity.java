@@ -67,6 +67,7 @@ public class CalibrationActivity extends AppCompatActivity {
     private TextView mTvNodCalibrationValue;
     private Button mBtNodZero;
     private TextView mTvNodHint;
+    private TextView mTvHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,48 @@ public class CalibrationActivity extends AppCompatActivity {
             Log.d(TAG, "open =====================444444444444444444=" + e.getMessage());
         }
 
+
+    }
+
+    private void refreshHistory() {
+
+        getNodRightMax = ControlActuator.get(getApplicationContext(), "getNodRightMax");
+        getNodLeftMax = ControlActuator.get(getApplicationContext(), "getNodLeftMax");
+        getsHakeRightMax = ControlActuator.get(getApplicationContext(), "getsHakeRightMax");
+        getsHakeLeftMax = ControlActuator.get(getApplicationContext(), "getsHakeLeftMax");
+
+        StringBuilder sb = new StringBuilder();
+        if (mZeroValue != -9999) {
+            sb.append("shake:" + mZeroValue);
+        }
+        if (mNodZeroValue != -9999) {
+            sb.append("nod:" + mNodZeroValue);
+        }
+        if (getsHakeLeftMax != -9999) {
+            sb.append("left:" + getsHakeLeftMax);
+        }
+        if (getsHakeRightMax != -9999) {
+            sb.append("right:" + getsHakeRightMax);
+        }
+        if (getNodLeftMax != -9999) {
+            sb.append("top:" + getNodLeftMax);
+        }
+        if (getNodRightMax != -9999) {
+            sb.append("bottom:" + getNodRightMax);
+        }
+
+        sb.append("点击清空极限位");
+
+        mTvHistory.setText(sb.toString());
+        mTvHistory.setOnClickListener(v -> {
+            ControlActuator.put(getApplicationContext(), "getsHakeLeftMax", -9999);
+            ControlActuator.put(getApplicationContext(), "getsHakeRightMax", -9999);
+            ControlActuator.put(getApplicationContext(), "getNodLeftMax", -9999);
+            ControlActuator.put(getApplicationContext(), "getNodRightMax", -9999);
+            refreshHistory();
+            Toast.makeText(CalibrationActivity.this, "已清空", Toast.LENGTH_SHORT).show();
+
+        });
     }
 
     private void initView() {
@@ -126,8 +169,10 @@ public class CalibrationActivity extends AppCompatActivity {
             finish();
         });
 
+        mTvHistory = findViewById(R.id.tv_history);
         mNodZeroValue = ControlActuator.getNod(getApplicationContext());
         mZeroValue = ControlActuator.getShake(getApplicationContext());
+        refreshHistory();
         initShake();
         initNod();
     }
@@ -341,22 +386,26 @@ public class CalibrationActivity extends AppCompatActivity {
                                                 float angle = bytes[3] / 10f;
                                                 mTvShakeLeftValue.setText(getPeople(angle) + "度");
                                                 getsHakeLeftMax = bytes[3];
+                                                ControlActuator.put(CalibrationActivity.this, "getsHakeLeftMax", getsHakeLeftMax);
                                                 mCheckMap.put(getIndex, true);
                                             } else if (getIndex == 1) {
                                                 float angle = bytes[3] / 10f;
                                                 mTvShakeRightValue.setText(getPeople(angle) + "度");
                                                 getsHakeRightMax = bytes[3];
+                                                ControlActuator.put(CalibrationActivity.this, "getsHakeRightMax", getsHakeRightMax);
                                                 mCheckMap.put(getIndex, true);
                                                 // 点头舵机 上下极限位
                                             } else if (getIndex == 5) {
                                                 float angle = bytes[2] / 10f;
                                                 mTvNodLeftValue.setText(getPeople(angle) + "度");
                                                 getNodLeftMax = bytes[2];
+                                                ControlActuator.put(CalibrationActivity.this, "getNodLeftMax", getNodLeftMax);
                                                 mCheckMap.put(getIndex, true);
                                             } else if (getIndex == 6) {
                                                 float angle = bytes[2] / 10f;
                                                 mTvNodRightValue.setText(getPeople(angle) + "度");
                                                 getNodRightMax = bytes[2];
+                                                ControlActuator.put(CalibrationActivity.this, "getNodRightMax", getNodRightMax);
                                                 mCheckMap.put(getIndex, true);
                                             }
                                         }
@@ -410,6 +459,7 @@ public class CalibrationActivity extends AppCompatActivity {
                                         }
                                         break;
                                 }
+                                refreshHistory();
                             }
                         });
                         SerialPortUtil.parseOrder(hexData);

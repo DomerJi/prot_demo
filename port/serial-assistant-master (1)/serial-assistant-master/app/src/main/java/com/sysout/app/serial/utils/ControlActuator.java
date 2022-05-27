@@ -33,4 +33,15 @@ public class ControlActuator {
         SharedPreferences preferences = context.getApplicationContext().getSharedPreferences(KEY_SP_NAME, Context.MODE_PRIVATE);
         return preferences.getInt(KEY_SHAKE_NAME, -9999);
     }
+
+
+    public static void put(Context context, String key, int value) {
+        SharedPreferences preferences = context.getApplicationContext().getSharedPreferences(KEY_SP_NAME, Context.MODE_PRIVATE);
+        preferences.edit().putInt(key, value).commit();
+    }
+
+    public static int get(Context context, String key) {
+        SharedPreferences preferences = context.getApplicationContext().getSharedPreferences(KEY_SP_NAME, Context.MODE_PRIVATE);
+        return preferences.getInt(key, -9999);
+    }
 }

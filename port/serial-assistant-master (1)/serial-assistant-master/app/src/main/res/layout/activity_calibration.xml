@@ -65,6 +65,15 @@
         android:textColor="@color/text_red"
         android:textSize="@dimen/textSize_large" />
 
+    <TextView
+        android:id="@+id/tv_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="6dp"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/textSize_small" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

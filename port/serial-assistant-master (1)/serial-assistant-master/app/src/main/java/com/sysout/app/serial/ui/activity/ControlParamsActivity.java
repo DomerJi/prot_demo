@@ -125,6 +125,7 @@ public class ControlParamsActivity extends AppCompatActivity {
 
         mBtShake.setOnClickListener(v -> {
             mShakeZero = ControlActuator.getShake(getApplicationContext());
+//            mShakeZero = 0;
             if (mShakeZero == -9999) {
                 toast("请先获取摇头零位");
                 return;
@@ -200,6 +201,7 @@ public class ControlParamsActivity extends AppCompatActivity {
 
         mBtNod.setOnClickListener(v -> {
             mNodZero = ControlActuator.getNod(getApplicationContext());
+//            mNodZero = 0;
             if (mNodZero == -9999) {
                 toast("请先获取点头零位");
                 return;
@@ -230,7 +232,7 @@ public class ControlParamsActivity extends AppCompatActivity {
         mBtNodTime.setOnClickListener(v -> {
             timeNod = (timeNod + 100) % 5000;
             if (timeNod <= 100) {
-                countNod = 100;
+                timeNod = 100;
             }
             refreshNod();
         });
@@ -325,17 +327,17 @@ public class ControlParamsActivity extends AppCompatActivity {
         if (actionNodRunnable != null) {
             mHandlerNod.removeCallbacks(actionNodRunnable);
         }
-        if (runCountNod == count) {
+        if (runCountNod == countNod) {
             // 上
-            params = new int[]{1, mNodZero + rightNod, time / 2};
+            params = new int[]{1, mNodZero + rightNod, timeNod / 2};
         } else if (runCountNod == -1) {
             // 归零
             isBottom = !isBottom;
-            params = new int[]{1, mNodZero, time / 2};
+            params = new int[]{1, mNodZero, timeNod / 2};
         } else {
             // 下or上
             isBottom = !isBottom;
-            params = new int[]{1, isBottom ? mNodZero + rightNod : mNodZero - leftNod, time};
+            params = new int[]{1, isBottom ? mNodZero + rightNod : mNodZero - leftNod, timeNod};
         }
         mTvNodHint.setText(mTvNodHint.getText().toString()
                 + "\n" + (isBottom ? "【上】" : "【下】")
@@ -379,7 +381,6 @@ public class ControlParamsActivity extends AppCompatActivity {
         mBtNodLeft.setText("上:" + getPeople(leftNod / 10f));
         mBtNodRight.setText("下:" + getPeople(rightNod / 10f));
         mBtNodRepeatCount.setText("次数:" + countNod);
-        mTvNodHint.setText("次数:" + countNod);
         if (mNodZero != -9999) {
             mBtNodZero.setText("归零[" + getPeople(mNodZero / 10f) + "]");
         }
