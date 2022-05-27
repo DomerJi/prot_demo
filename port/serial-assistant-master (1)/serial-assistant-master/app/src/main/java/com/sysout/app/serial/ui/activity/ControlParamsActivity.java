@@ -37,7 +37,9 @@ public class ControlParamsActivity extends AppCompatActivity {
     private static final String KEY_SHAKE_RIGHT = "shake.right";
     private static final String KEY_SHAKE_TIME = "shake.time";
     private static final String KEY_SHAKE_COUNT = "shake.count";
+    private static final String KEY_SHAKE_OFFSET = "shake.offset";
     private int mShakeZero = -9999;
+    private int mShakeZeroOffset = 0;
 
     private int left;
     private int right;
@@ -48,7 +50,9 @@ public class ControlParamsActivity extends AppCompatActivity {
     private static final String KEY_NOD_RIGHT = "nod.right";
     private static final String KEY_NOD_TIME = "nod.time";
     private static final String KEY_NOD_COUNT = "nod.count";
+    private static final String KEY_NOD_OFFSET = "nod.offset";
     private int mNodZero = -9999;
+    private int mNodZeroOffset = -100;
     private int leftNod;
     private int rightNod;
     private int timeNod;
@@ -68,6 +72,9 @@ public class ControlParamsActivity extends AppCompatActivity {
     private Button mBtNodTime;
     private Button mBtNodRepeatCount;
     private TextView mTvNodHint;
+    private Toolbar mToolbar;
+    private Button mBtShakeOffset;
+    private Button mBtNodOffset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,11 +98,13 @@ public class ControlParamsActivity extends AppCompatActivity {
         right = mPreferences.getInt(KEY_SHAKE_RIGHT, 360);
         time = mPreferences.getInt(KEY_SHAKE_TIME, 2000);
         count = mPreferences.getInt(KEY_SHAKE_COUNT, 1);
+        mShakeZeroOffset = mPreferences.getInt(KEY_SHAKE_OFFSET, 0);
 
         leftNod = mPreferences.getInt(KEY_NOD_LEFT, 140);
         rightNod = mPreferences.getInt(KEY_NOD_RIGHT, 260);
         timeNod = mPreferences.getInt(KEY_NOD_TIME, 2000);
         countNod = mPreferences.getInt(KEY_NOD_COUNT, 1);
+        mNodZeroOffset = mPreferences.getInt(KEY_NOD_OFFSET, -100);
 
         initView();
         try {
@@ -120,6 +129,7 @@ public class ControlParamsActivity extends AppCompatActivity {
                 toast("请先获取摇头零位");
                 return;
             }
+            mShakeZero = mShakeZero + mShakeZeroOffset;
             runCount = count;
             mTvShakeHint.setText("");
             isRight = true;
@@ -164,11 +174,24 @@ public class ControlParamsActivity extends AppCompatActivity {
                 toast("请先获取摇头零位");
                 return;
             }
+
+            mShakeZero = mShakeZero + mShakeZeroOffset;
             if (serialOpened()) {
                 serialHelper.sendHex(SerialPortUtil.getSendData(Order.DOWN_SERVO_STATE, 2, mShakeZero, 5000));
             }
 
         });
+
+        mBtShakeOffset.setOnClickListener(v -> {
+            mShakeZeroOffset = (mShakeZeroOffset - 10);
+            if (mShakeZeroOffset < -200) {
+                mShakeZeroOffset = 200;
+            } else if (mShakeZeroOffset > 200) {
+                mShakeZeroOffset = -200;
+            }
+            refreshShake();
+        });
+
 
         refreshShake();
     }
@@ -176,11 +199,12 @@ public class ControlParamsActivity extends AppCompatActivity {
     private void initNod() {
 
         mBtNod.setOnClickListener(v -> {
-            mNodZero = ControlActuator.getShake(getApplicationContext());
+            mNodZero = ControlActuator.getNod(getApplicationContext());
             if (mNodZero == -9999) {
                 toast("请先获取点头零位");
                 return;
             }
+            mNodZero = mNodZero + mNodZeroOffset;
             runCountNod = countNod;
             mTvNodHint.setText("");
             isBottom = true;
@@ -220,16 +244,28 @@ public class ControlParamsActivity extends AppCompatActivity {
         });
 
         mBtNodZero.setOnClickListener(v -> {
-            mNodZero = ControlActuator.getShake(getApplicationContext());
+            mNodZero = ControlActuator.getNod(getApplicationContext());
             if (mNodZero == -9999) {
                 toast("请先获取点头零位");
                 return;
             }
+            mNodZero = mNodZero + mNodZeroOffset;
             if (serialOpened()) {
                 serialHelper.sendHex(SerialPortUtil.getSendData(Order.DOWN_SERVO_STATE, 1, mNodZero, 5000));
             }
 
         });
+
+        mBtNodOffset.setOnClickListener(v -> {
+            mNodZeroOffset = (mNodZeroOffset - 10);
+            if (mNodZeroOffset < -200) {
+                mNodZeroOffset = 200;
+            } else if (mNodZeroOffset > 200) {
+                mNodZeroOffset = -200;
+            }
+            refreshNod();
+        });
+
 
         refreshNod();
     }
@@ -329,8 +365,11 @@ public class ControlParamsActivity extends AppCompatActivity {
         if (mShakeZero != -9999) {
             mBtShakeZero.setText("归零[" + getPeople(mShakeZero / 10f) + "]");
         }
+        mBtShakeOffset.setText("偏移[" + getPeople(mShakeZeroOffset / 10f) + "]");
         mPreferences.edit().putInt(KEY_SHAKE_LEFT, left).putInt(KEY_SHAKE_RIGHT, right)
-                .putInt(KEY_SHAKE_TIME, time).putInt(KEY_SHAKE_COUNT, count).commit();
+                .putInt(KEY_SHAKE_TIME, time)
+                .putInt(KEY_SHAKE_OFFSET, mShakeZeroOffset)
+                .putInt(KEY_SHAKE_COUNT, count).commit();
     }
 
 
@@ -340,11 +379,15 @@ public class ControlParamsActivity extends AppCompatActivity {
         mBtNodLeft.setText("上:" + getPeople(leftNod / 10f));
         mBtNodRight.setText("下:" + getPeople(rightNod / 10f));
         mBtNodRepeatCount.setText("次数:" + countNod);
+        mTvNodHint.setText("次数:" + countNod);
         if (mNodZero != -9999) {
             mBtNodZero.setText("归零[" + getPeople(mNodZero / 10f) + "]");
         }
+        mBtNodOffset.setText("偏移[" + getPeople(mNodZeroOffset / 10f) + "]");
         mPreferences.edit().putInt(KEY_NOD_LEFT, leftNod).putInt(KEY_NOD_RIGHT, rightNod)
-                .putInt(KEY_NOD_TIME, timeNod).putInt(KEY_NOD_COUNT, countNod).commit();
+                .putInt(KEY_NOD_TIME, timeNod)
+                .putInt(KEY_NOD_OFFSET, mNodZeroOffset)
+                .putInt(KEY_NOD_COUNT, countNod).commit();
     }
 
     /**
@@ -443,6 +486,9 @@ public class ControlParamsActivity extends AppCompatActivity {
         mBtNodTime = (Button) findViewById(R.id.bt_nod_time);
         mBtNodRepeatCount = (Button) findViewById(R.id.bt_nod_repeat_count);
         mTvNodHint = (TextView) findViewById(R.id.tv_nod_hint);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mBtShakeOffset = (Button) findViewById(R.id.bt_shake_offset);
+        mBtNodOffset = (Button) findViewById(R.id.bt_nod_offset);
     }
 
     private void toast(String text) {
