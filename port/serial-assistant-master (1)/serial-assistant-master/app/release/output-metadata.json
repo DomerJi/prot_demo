@@ -10,9 +10,9 @@
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 117,
-      "versionName": "1.2.7",
-      "outputFile": "PortTest_117_1.2.7_release.apk"
+      "versionCode": 120,
+      "versionName": "1.3.0",
+      "outputFile": "PortTest_120_1.3.0_release.apk"
     }
   ]
 }

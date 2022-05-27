@@ -3,15 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.activity.PortHomeActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.SerialAssistant.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:navigationIcon="@drawable/icon_back_white"
+            app:popupTheme="@style/Theme.SerialAssistant.PopupOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <Button
         android:id="@+id/bt_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="返回" />
+        android:text="返回"
+        android:visibility="gone" />
 
 
     <Button
@@ -37,6 +56,14 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:text="C(舵机校准)" />
+
+    <Button
+        android:id="@+id/bt_page_04"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="D(点头摇头)" />
 
 
     <LinearLayout
@@ -174,6 +201,13 @@
 
     <TextView
         android:id="@+id/tv_text_parse_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/tv_dpi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold" />

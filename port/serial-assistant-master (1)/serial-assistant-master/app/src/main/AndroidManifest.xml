@@ -19,8 +19,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SerialAssistant">
-        <activity android:name=".ui.activity.CalibrationActivity"></activity>
-        <activity android:name=".ui.activity.PortHomeActivity" />
+        <activity
+            android:name=".ui.activity.ControlParamsActivity"
+            android:label="点头摇头"
+            android:theme="@style/Theme.SerialAssistant.NoActionBar"></activity>
+        <activity
+            android:name=".ui.activity.CalibrationActivity"
+            android:label="舵机校准"
+            android:theme="@style/Theme.SerialAssistant.NoActionBar" />
+        <activity
+            android:name=".ui.activity.PortHomeActivity"
+            android:label="串口Demo"
+            android:theme="@style/Theme.SerialAssistant.NoActionBar" />
         <activity
             android:name=".ui.activity.SplashActivity"
             android:label="@string/app_name"
@@ -31,11 +41,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--        <provider-->
+        <!--            android:authorities="com.pl.sphelper"-->
+        <!--            android:name="com.pl.sphelper.SPContentProvider"-->
+        <!--            android:exported="true"-->
+        <!--            android:enabled="true"/>-->
+
         <activity
             android:name=".ui.activity.MainActivity"
+            android:label="调试助手"
             android:theme="@style/Theme.SerialAssistant.NoActionBar" />
         <activity
             android:name=".ui.activity.PortTestActivity"
+            android:label="协议指令"
             android:theme="@style/Theme.SerialAssistant.NoActionBar" />
         <activity
             android:name=".ui.activity.LoadCommandActivity"

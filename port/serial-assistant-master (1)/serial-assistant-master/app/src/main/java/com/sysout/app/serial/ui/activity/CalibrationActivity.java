@@ -4,13 +4,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.sysout.app.serial.R;
+import com.sysout.app.serial.utils.ControlActuator;
 import com.sysout.app.serial.utils.Order;
 import com.sysout.app.serial.utils.SerialDataUtils;
 import com.sysout.app.serial.utils.SerialHelper;
@@ -23,6 +26,7 @@ import java.util.HashMap;
 public class CalibrationActivity extends AppCompatActivity {
 
     private static final String TAG = "Calibration";
+
 
     private Button mBtBack;
     private TextView mTvShakeTitle;
@@ -38,17 +42,17 @@ public class CalibrationActivity extends AppCompatActivity {
     private HashMap<Integer, Boolean> mCheckMap = new HashMap<>();
 
     Handler mHandler = new Handler(Looper.getMainLooper());
-    int sHakeLeft = -999;
-    int sHakeRight = -999;
-    int getsHakeLeftMax = -999;
-    int getsHakeRightMax = -999;
-    int mZeroValue = -999;
+    int sHakeLeft = -9999;
+    int sHakeRight = -9999;
+    int getsHakeLeftMax = -9999;
+    int getsHakeRightMax = -9999;
+    int mZeroValue = -9999;
 
-    int nodLeft = -999;
-    int nodRight = -999;
-    int getNodLeftMax = -999;
-    int getNodRightMax = -999;
-    int mNodZeroValue = -999;
+    int nodLeft = -9999;
+    int nodRight = -9999;
+    int getNodLeftMax = -9999;
+    int getNodRightMax = -9999;
+    int mNodZeroValue = -9999;
 
     private Button mBtDownElectricity;
     private Button mBtUpElectricity;
@@ -69,6 +73,17 @@ public class CalibrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibration);
         initView();
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("舵机校准");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         try {
             Log.d(TAG, "open =====================1111111111111111111=");
             int openStatus = open(SerialPortUtil.PORT_NAME, SerialPortUtil.IBAUDTATE);
@@ -111,6 +126,8 @@ public class CalibrationActivity extends AppCompatActivity {
             finish();
         });
 
+        mNodZeroValue = ControlActuator.getNod(getApplicationContext());
+        mZeroValue = ControlActuator.getShake(getApplicationContext());
         initShake();
         initNod();
     }
@@ -127,7 +144,7 @@ public class CalibrationActivity extends AppCompatActivity {
         });
 
         mBtShakeCalibration.setOnClickListener(v -> {
-            if (getsHakeLeftMax == -999 || getsHakeRightMax == -999) {
+            if (getsHakeLeftMax == -9999 || getsHakeRightMax == -9999) {
                 Toast.makeText(CalibrationActivity.this, "请先获取左右极限位", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -160,7 +177,7 @@ public class CalibrationActivity extends AppCompatActivity {
         });
         mBtShakeZero.setOnClickListener(v -> {
             if (serialOpened()) {
-                if (mZeroValue == -999) {
+                if (mZeroValue == -9999) {
                     Toast.makeText(CalibrationActivity.this, "请先校准获取零位", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -182,7 +199,7 @@ public class CalibrationActivity extends AppCompatActivity {
         });
 
         mBtNodCalibration.setOnClickListener(v -> {
-            if (getNodLeftMax == -999 || getNodRightMax == -999) {
+            if (getNodLeftMax == -9999 || getNodRightMax == -9999) {
                 Toast.makeText(CalibrationActivity.this, "请先获取上下极限位", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -215,7 +232,7 @@ public class CalibrationActivity extends AppCompatActivity {
         });
         mBtNodZero.setOnClickListener(v -> {
             if (serialOpened()) {
-                if (mNodZeroValue == -999) {
+                if (mNodZeroValue == -9999) {
                     Toast.makeText(CalibrationActivity.this, "请先校准获取零位", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -358,6 +375,7 @@ public class CalibrationActivity extends AppCompatActivity {
                                                 mTvShakeCalibrationValue.setText(mTvShakeCalibrationValue.getText().toString()
                                                         + "  *  left：" + getPeople(angle));
                                                 mZeroValue = (sHakeLeft + sHakeRight) / 2;
+                                                ControlActuator.writeShake(getApplicationContext(), mZeroValue);
                                                 mHandler.postDelayed(new Runnable() {
                                                     @Override
                                                     public void run() {
@@ -379,6 +397,7 @@ public class CalibrationActivity extends AppCompatActivity {
                                                 mTvNodCalibrationValue.setText(mTvNodCalibrationValue.getText().toString()
                                                         + "  *  top：" + getPeople(angle));
                                                 mNodZeroValue = (nodLeft + nodRight) / 2;
+                                                ControlActuator.writeNod(getApplicationContext(), mNodZeroValue);
                                                 mHandler.postDelayed(new Runnable() {
                                                     @Override
                                                     public void run() {

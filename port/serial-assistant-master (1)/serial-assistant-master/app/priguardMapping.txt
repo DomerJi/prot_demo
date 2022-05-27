@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.1.86
 # min_api: 19
-# pg_map_id: 011b232
+# pg_map_id: 36bbde5
 # common_typos_disable
 com.afollestad.date.CalendarsKt -> com.afollestad.date.a:
     java.util.Calendar decrementMonth(java.util.Calendar) -> a
@@ -1787,6 +1787,13 @@ com.google.gson.stream.JsonWriter -> com.google.gson.t.a:
     com.google.gson.stream.JsonWriter value(java.lang.Boolean) -> x
     com.google.gson.stream.JsonWriter value(java.lang.Number) -> y
     com.google.gson.stream.JsonWriter value(java.lang.String) -> z
+com.pl.sphelper.SPHelper -> a.b.a.a:
+    android.content.Context context -> a
+    void checkContext() -> a
+    java.util.Map getAll() -> b
+    void init(android.app.Application) -> c
+com.sysout.app.serial.AppApplication -> com.sysout.app.serial.AppApplication:
+    android.app.Application sInstance -> a
 com.sysout.app.serial.constants.Constants -> com.sysout.app.serial.a.a:
     java.lang.String APP_PATH -> a
     java.lang.String LOGS_PATH -> b
@@ -1850,113 +1857,143 @@ com.sysout.app.serial.ui.activity.-$$Lambda$CalibrationActivity$hgiEcFxD4CXjzViw
     com.sysout.app.serial.ui.activity.CalibrationActivity f$0 -> a
 com.sysout.app.serial.ui.activity.-$$Lambda$CalibrationActivity$x72Z20HtEnSBgU86_56WgEVmD8M -> com.sysout.app.serial.ui.activity.k:
     com.sysout.app.serial.ui.activity.CalibrationActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$LoadCommandActivity$1$7hfvEh4nn1R9vVhud42npbgfE2w -> com.sysout.app.serial.ui.activity.l:
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$1qwiw0T_80pq0wlvK8ZU_rbRojE -> com.sysout.app.serial.ui.activity.l:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$5kdYLXDBeXAX0qECyWEztvHgXWI -> com.sysout.app.serial.ui.activity.m:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$8vdSF0EZKMqe9uI9gYNEI77Ieeg -> com.sysout.app.serial.ui.activity.n:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$AIcHn1gZcnnFlHRKtNvNKdItEZA -> com.sysout.app.serial.ui.activity.o:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$AgvpdznqoIS5ZjaGeDPM7A-Pyjk -> com.sysout.app.serial.ui.activity.p:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$BFA37kFvdvE1jEkGCeRCogv1cqM -> com.sysout.app.serial.ui.activity.q:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$DJum5JPwgs5alf51ED9Ke0GCXPQ -> com.sysout.app.serial.ui.activity.r:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$J9ivGMF_V2ZxIOXNJYpicW9PR_c -> com.sysout.app.serial.ui.activity.s:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$SfDeJ1h82LOBdLno0OjxET4C26Y -> com.sysout.app.serial.ui.activity.t:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$WLMuWpXQxa0g_4Ef4Qtw-yMSpbU -> com.sysout.app.serial.ui.activity.u:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$X6qxIYgb_cA4Rf94MH4zP0SE0uc -> com.sysout.app.serial.ui.activity.v:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$mEXSK-WEo2iPYM6RrqT9UXht4Qo -> com.sysout.app.serial.ui.activity.w:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$ControlParamsActivity$ptxnKIfPt4nnF-4Cly4_nMKtC1U -> com.sysout.app.serial.ui.activity.x:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$LoadCommandActivity$1$7hfvEh4nn1R9vVhud42npbgfE2w -> com.sysout.app.serial.ui.activity.y:
     com.sysout.app.serial.ui.activity.LoadCommandActivity$1 f$0 -> a
     void OnCenterItemClick(com.sysout.app.serial.entity.SerialCommand) -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$LoadCommandActivity$1$DyQTCYmHRxmP_W6fkO4c51axY0s -> com.sysout.app.serial.ui.activity.m:
+com.sysout.app.serial.ui.activity.-$$Lambda$LoadCommandActivity$1$DyQTCYmHRxmP_W6fkO4c51axY0s -> com.sysout.app.serial.ui.activity.z:
     com.sysout.app.serial.ui.activity.LoadCommandActivity$1 f$0 -> a
     long f$1 -> b
-com.sysout.app.serial.ui.activity.-$$Lambda$LoadCommandActivity$1$LUUdqIGwNJeocCBP06XooiCALK0 -> com.sysout.app.serial.ui.activity.n:
+com.sysout.app.serial.ui.activity.-$$Lambda$LoadCommandActivity$1$LUUdqIGwNJeocCBP06XooiCALK0 -> com.sysout.app.serial.ui.activity.a0:
     com.sysout.app.serial.ui.activity.-$$Lambda$LoadCommandActivity$1$LUUdqIGwNJeocCBP06XooiCALK0 INSTANCE -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$LoadCommandActivity$B4zTQ5my0Fj6gi20ujXE1SZtnow -> com.sysout.app.serial.ui.activity.o:
+com.sysout.app.serial.ui.activity.-$$Lambda$LoadCommandActivity$B4zTQ5my0Fj6gi20ujXE1SZtnow -> com.sysout.app.serial.ui.activity.b0:
     com.sysout.app.serial.ui.activity.LoadCommandActivity f$0 -> a
     void OnCenterItemClick(com.sysout.app.serial.entity.SerialCommand) -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$LoadCommandActivity$y3CtEdJ7xWHlyXv5RoiQ0k248d0 -> com.sysout.app.serial.ui.activity.p:
+com.sysout.app.serial.ui.activity.-$$Lambda$LoadCommandActivity$y3CtEdJ7xWHlyXv5RoiQ0k248d0 -> com.sysout.app.serial.ui.activity.c0:
     com.sysout.app.serial.ui.activity.LoadCommandActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$LogDetailActivity$e21Q36nLHy0SJ1XLS88IlMNTWbs -> com.sysout.app.serial.ui.activity.q:
+com.sysout.app.serial.ui.activity.-$$Lambda$LogDetailActivity$e21Q36nLHy0SJ1XLS88IlMNTWbs -> com.sysout.app.serial.ui.activity.d0:
     com.sysout.app.serial.ui.activity.LogDetailActivity f$0 -> a
     java.lang.StringBuilder f$1 -> b
-com.sysout.app.serial.ui.activity.-$$Lambda$LogDetailActivity$ogB3QqG5QbN66o6IjZn7-8O-RAk -> com.sysout.app.serial.ui.activity.r:
+com.sysout.app.serial.ui.activity.-$$Lambda$LogDetailActivity$ogB3QqG5QbN66o6IjZn7-8O-RAk -> com.sysout.app.serial.ui.activity.e0:
     com.sysout.app.serial.ui.activity.LogDetailActivity f$0 -> a
     java.lang.String f$1 -> b
-com.sysout.app.serial.ui.activity.-$$Lambda$LogsActivity$g4ZVD3-4pkYTe7Hk3avVRyac8SM -> com.sysout.app.serial.ui.activity.s:
+com.sysout.app.serial.ui.activity.-$$Lambda$LogsActivity$g4ZVD3-4pkYTe7Hk3avVRyac8SM -> com.sysout.app.serial.ui.activity.f0:
     com.sysout.app.serial.ui.activity.LogsActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$LogsActivity$gLD6rO3vrsWtsOaVeGzgFRBXhcg -> com.sysout.app.serial.ui.activity.t:
+com.sysout.app.serial.ui.activity.-$$Lambda$LogsActivity$gLD6rO3vrsWtsOaVeGzgFRBXhcg -> com.sysout.app.serial.ui.activity.g0:
     com.sysout.app.serial.ui.activity.-$$Lambda$LogsActivity$gLD6rO3vrsWtsOaVeGzgFRBXhcg INSTANCE -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$4IhmkjpJqDrDOuOMCwjsl7Ssy1Q -> com.sysout.app.serial.ui.activity.u:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$4IhmkjpJqDrDOuOMCwjsl7Ssy1Q -> com.sysout.app.serial.ui.activity.h0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$6lLzhEfJo6HARwAsJHoRvpfz5TY -> com.sysout.app.serial.ui.activity.v:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$6lLzhEfJo6HARwAsJHoRvpfz5TY -> com.sysout.app.serial.ui.activity.i0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$75MUll0b5cFDQPFGb5adE1J2f5E -> com.sysout.app.serial.ui.activity.w:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$75MUll0b5cFDQPFGb5adE1J2f5E -> com.sysout.app.serial.ui.activity.j0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$9ACE4rhYoozB19F7RMO5VSH68HY -> com.sysout.app.serial.ui.activity.x:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$9ACE4rhYoozB19F7RMO5VSH68HY -> com.sysout.app.serial.ui.activity.k0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$9a-7-_OHBlIZ3HnBK0by5eBdThs -> com.sysout.app.serial.ui.activity.y:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$9a-7-_OHBlIZ3HnBK0by5eBdThs -> com.sysout.app.serial.ui.activity.l0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$AlxLcPr_ayzChCCZDyINgABOvsg -> com.sysout.app.serial.ui.activity.z:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$AlxLcPr_ayzChCCZDyINgABOvsg -> com.sysout.app.serial.ui.activity.m0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$BGmRgXHVpkysjnpJevOlDQrYQ1k -> com.sysout.app.serial.ui.activity.a0:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$BGmRgXHVpkysjnpJevOlDQrYQ1k -> com.sysout.app.serial.ui.activity.n0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
     java.lang.String f$1 -> b
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$HAYD3weFZVZQW5NmXX8zHJrc5SE -> com.sysout.app.serial.ui.activity.b0:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$HAYD3weFZVZQW5NmXX8zHJrc5SE -> com.sysout.app.serial.ui.activity.o0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$Kqjnq4dNc7ZE2gAdIcD-8hJcCc0 -> com.sysout.app.serial.ui.activity.c0:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$Kqjnq4dNc7ZE2gAdIcD-8hJcCc0 -> com.sysout.app.serial.ui.activity.p0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$P_lZZZwa4neRDiPu4MMjQKKphaI -> com.sysout.app.serial.ui.activity.d0:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$P_lZZZwa4neRDiPu4MMjQKKphaI -> com.sysout.app.serial.ui.activity.q0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$U4NUMxFIP5kq92Pm8eoG91h6b4U -> com.sysout.app.serial.ui.activity.e0:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$U4NUMxFIP5kq92Pm8eoG91h6b4U -> com.sysout.app.serial.ui.activity.r0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$ZP9Eyv1QNOJi5YJq_TkXC6UfApo -> com.sysout.app.serial.ui.activity.f0:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$ZP9Eyv1QNOJi5YJq_TkXC6UfApo -> com.sysout.app.serial.ui.activity.s0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$cLPJkDXo1SwPGvJmBuXIeBCFX_E -> com.sysout.app.serial.ui.activity.g0:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$cLPJkDXo1SwPGvJmBuXIeBCFX_E -> com.sysout.app.serial.ui.activity.t0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
     void OnCenterItemClick(int,int,int) -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$eBjkM9_x_J-aojoD-LwhRrjlU0k -> com.sysout.app.serial.ui.activity.h0:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$eBjkM9_x_J-aojoD-LwhRrjlU0k -> com.sysout.app.serial.ui.activity.u0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$jNk8m4Atiq_zGP8xVUPdpvx16-I -> com.sysout.app.serial.ui.activity.i0:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$jNk8m4Atiq_zGP8xVUPdpvx16-I -> com.sysout.app.serial.ui.activity.v0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$tpl_JFHQ76x_foRQNgjDloipijU -> com.sysout.app.serial.ui.activity.j0:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$tpl_JFHQ76x_foRQNgjDloipijU -> com.sysout.app.serial.ui.activity.w0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$xI-lE21Yi-StqrPXuww7G6EPV0E -> com.sysout.app.serial.ui.activity.k0:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$xI-lE21Yi-StqrPXuww7G6EPV0E -> com.sysout.app.serial.ui.activity.x0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$xOk0tlcwSZvZ2m1VqXn8-3qz4Mo -> com.sysout.app.serial.ui.activity.l0:
+com.sysout.app.serial.ui.activity.-$$Lambda$MainActivity$xOk0tlcwSZvZ2m1VqXn8-3qz4Mo -> com.sysout.app.serial.ui.activity.y0:
     com.sysout.app.serial.ui.activity.MainActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$8o77dxliDYWYUn2txyu2I_MQd3E -> com.sysout.app.serial.ui.activity.m0:
-    com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$8o77dxliDYWYUn2txyu2I_MQd3E INSTANCE -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$Amq21_wOvvWsuVhpz0PoRwWMutQ -> com.sysout.app.serial.ui.activity.n0:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$Amq21_wOvvWsuVhpz0PoRwWMutQ -> com.sysout.app.serial.ui.activity.z0:
     com.sysout.app.serial.ui.activity.PortHomeActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$B43YCwzW74rn5HP93qA-NCZ6n14 -> com.sysout.app.serial.ui.activity.o0:
-    com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$B43YCwzW74rn5HP93qA-NCZ6n14 INSTANCE -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$DPRwBAdPTi4Jbodq6J5aMCAgPbg -> com.sysout.app.serial.ui.activity.p0:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$DPRwBAdPTi4Jbodq6J5aMCAgPbg -> com.sysout.app.serial.ui.activity.a1:
     com.sysout.app.serial.ui.activity.PortHomeActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$HawNY065YFUjag5-k0z93gm5Q-Y -> com.sysout.app.serial.ui.activity.q0:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$HawNY065YFUjag5-k0z93gm5Q-Y -> com.sysout.app.serial.ui.activity.b1:
     com.sysout.app.serial.ui.activity.PortHomeActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$MKl0qOhKT6e7B8rGaiK6meugy4g -> com.sysout.app.serial.ui.activity.r0:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$MKl0qOhKT6e7B8rGaiK6meugy4g -> com.sysout.app.serial.ui.activity.c1:
     com.sysout.app.serial.ui.activity.PortHomeActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$UK4RP2ZtQpV28SgSnCsYHNOEkAs -> com.sysout.app.serial.ui.activity.s0:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$V7M3hFp3-KZ_RJHDQK4BEDFqPaE -> com.sysout.app.serial.ui.activity.d1:
     com.sysout.app.serial.ui.activity.PortHomeActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$V7M3hFp3-KZ_RJHDQK4BEDFqPaE -> com.sysout.app.serial.ui.activity.t0:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$XIW2w0-d2vO9azKLmjI16icwhIQ -> com.sysout.app.serial.ui.activity.e1:
     com.sysout.app.serial.ui.activity.PortHomeActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$XIW2w0-d2vO9azKLmjI16icwhIQ -> com.sysout.app.serial.ui.activity.u0:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$_GmonJsWuT4Na__frU2bzp7mvAI -> com.sysout.app.serial.ui.activity.f1:
     com.sysout.app.serial.ui.activity.PortHomeActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$1$vy6Q-ewDeOM7Ed2PtCO0UmrCnz4 -> com.sysout.app.serial.ui.activity.v0:
-    com.sysout.app.serial.ui.activity.PortTestActivity$1 f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$dmATyrs83a7bJ0_fFB7vOn8l4s0 -> com.sysout.app.serial.ui.activity.g1:
+    com.sysout.app.serial.ui.activity.PortHomeActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$i1kMcXYEtaSWTFNgDXmDia0d74M -> com.sysout.app.serial.ui.activity.h1:
+    com.sysout.app.serial.ui.activity.PortHomeActivity f$0 -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$mOCHNrdH4ZsS8jG1LfViBV5Vigk -> com.sysout.app.serial.ui.activity.i1:
+    com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$mOCHNrdH4ZsS8jG1LfViBV5Vigk INSTANCE -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$zWQCuGw_19kvum7ZDc0wSAeY4T0 -> com.sysout.app.serial.ui.activity.j1:
+    com.sysout.app.serial.ui.activity.-$$Lambda$PortHomeActivity$zWQCuGw_19kvum7ZDc0wSAeY4T0 INSTANCE -> a
+com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$2$1NKBftGcJf_HuiDCe5s3VUPqW18 -> com.sysout.app.serial.ui.activity.k1:
+    com.sysout.app.serial.ui.activity.PortTestActivity$2 f$0 -> a
     android.widget.EditText f$3 -> d
     java.util.List f$2 -> c
     android.widget.Button f$1 -> b
-com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$70lTLQivYyPo2PjKbomkTgd7XfI -> com.sysout.app.serial.ui.activity.w0:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$70lTLQivYyPo2PjKbomkTgd7XfI -> com.sysout.app.serial.ui.activity.l1:
     com.sysout.app.serial.ui.activity.PortTestActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$CbFqF8yyqQcKJy5fOaxqxVKTbtw -> com.sysout.app.serial.ui.activity.x0:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$CbFqF8yyqQcKJy5fOaxqxVKTbtw -> com.sysout.app.serial.ui.activity.m1:
     com.sysout.app.serial.ui.activity.PortTestActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$IY8YqG4YGHVRUwCrgucixXEa6J0 -> com.sysout.app.serial.ui.activity.y0:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$IY8YqG4YGHVRUwCrgucixXEa6J0 -> com.sysout.app.serial.ui.activity.n1:
     com.sysout.app.serial.ui.activity.PortTestActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$MFJN5iggLkYY4adfq7NwOKbqx8I -> com.sysout.app.serial.ui.activity.z0:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$MFJN5iggLkYY4adfq7NwOKbqx8I -> com.sysout.app.serial.ui.activity.o1:
     com.sysout.app.serial.ui.activity.PortTestActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$OptionAdapter$OptionHolder$GS3W3FwgdrSWntvFhFk58qPArVk -> com.sysout.app.serial.ui.activity.a1:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$OptionAdapter$OptionHolder$GS3W3FwgdrSWntvFhFk58qPArVk -> com.sysout.app.serial.ui.activity.p1:
     com.sysout.app.serial.ui.activity.PortTestActivity$OptionAdapter$OptionHolder f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$V89ZqflFsJ2EaEiaeIoaz8Yw5DU -> com.sysout.app.serial.ui.activity.b1:
+com.sysout.app.serial.ui.activity.-$$Lambda$PortTestActivity$V89ZqflFsJ2EaEiaeIoaz8Yw5DU -> com.sysout.app.serial.ui.activity.q1:
     com.sysout.app.serial.ui.activity.PortTestActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$SettingActivity$4GQFGvW7otwd36ZxxJCJ3MZQhgE -> com.sysout.app.serial.ui.activity.c1:
+com.sysout.app.serial.ui.activity.-$$Lambda$SettingActivity$4GQFGvW7otwd36ZxxJCJ3MZQhgE -> com.sysout.app.serial.ui.activity.r1:
     com.sysout.app.serial.ui.activity.SettingActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$SettingActivity$TYEfSeFJR2uXSj9HDNos9dCozTg -> com.sysout.app.serial.ui.activity.d1:
+com.sysout.app.serial.ui.activity.-$$Lambda$SettingActivity$TYEfSeFJR2uXSj9HDNos9dCozTg -> com.sysout.app.serial.ui.activity.s1:
     com.sysout.app.serial.ui.activity.-$$Lambda$SettingActivity$TYEfSeFJR2uXSj9HDNos9dCozTg INSTANCE -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$SettingActivity$_phDSOakNswgpt_JBr8_DFhhYVs -> com.sysout.app.serial.ui.activity.e1:
+com.sysout.app.serial.ui.activity.-$$Lambda$SettingActivity$_phDSOakNswgpt_JBr8_DFhhYVs -> com.sysout.app.serial.ui.activity.t1:
     com.sysout.app.serial.ui.activity.-$$Lambda$SettingActivity$_phDSOakNswgpt_JBr8_DFhhYVs INSTANCE -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$SplashActivity$NoMcrHlcEu2HONSEefCDs7gc8yc -> com.sysout.app.serial.ui.activity.f1:
+com.sysout.app.serial.ui.activity.-$$Lambda$SplashActivity$NoMcrHlcEu2HONSEefCDs7gc8yc -> com.sysout.app.serial.ui.activity.u1:
     com.sysout.app.serial.ui.activity.SplashActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$SplashActivity$rW-wbC5sC5HG1mZqr7JfKe5i4mc -> com.sysout.app.serial.ui.activity.g1:
+com.sysout.app.serial.ui.activity.-$$Lambda$SplashActivity$rW-wbC5sC5HG1mZqr7JfKe5i4mc -> com.sysout.app.serial.ui.activity.v1:
     com.sysout.app.serial.ui.activity.SplashActivity f$0 -> a
-com.sysout.app.serial.ui.activity.-$$Lambda$SplashActivity$u7KCsEv8zaJY5g-bOdG_oFsBvik -> com.sysout.app.serial.ui.activity.h1:
+com.sysout.app.serial.ui.activity.-$$Lambda$SplashActivity$u7KCsEv8zaJY5g-bOdG_oFsBvik -> com.sysout.app.serial.ui.activity.w1:
     com.sysout.app.serial.ui.activity.SplashActivity f$0 -> a
 com.sysout.app.serial.ui.activity.AboutMeActivity -> com.sysout.app.serial.ui.activity.AboutMeActivity:
     void initView() -> a
@@ -2037,33 +2074,126 @@ com.sysout.app.serial.ui.activity.CalibrationActivity -> com.sysout.app.serial.u
     void lambda$initShake$1$CalibrationActivity(android.view.View) -> z
 com.sysout.app.serial.ui.activity.CalibrationActivity$1 -> com.sysout.app.serial.ui.activity.CalibrationActivity$a:
     com.sysout.app.serial.ui.activity.CalibrationActivity this$0 -> a
-com.sysout.app.serial.ui.activity.CalibrationActivity$1$1 -> com.sysout.app.serial.ui.activity.CalibrationActivity$a$a:
-    com.sysout.app.serial.ui.activity.CalibrationActivity$1 this$1 -> a
 com.sysout.app.serial.ui.activity.CalibrationActivity$2 -> com.sysout.app.serial.ui.activity.CalibrationActivity$b:
     com.sysout.app.serial.ui.activity.CalibrationActivity this$0 -> a
 com.sysout.app.serial.ui.activity.CalibrationActivity$2$1 -> com.sysout.app.serial.ui.activity.CalibrationActivity$b$a:
     com.sysout.app.serial.ui.activity.CalibrationActivity$2 this$1 -> a
 com.sysout.app.serial.ui.activity.CalibrationActivity$3 -> com.sysout.app.serial.ui.activity.CalibrationActivity$c:
-    com.sysout.app.serial.ui.activity.CalibrationActivity this$0 -> b
-    java.lang.String val$portStatus -> a
+    com.sysout.app.serial.ui.activity.CalibrationActivity this$0 -> a
+com.sysout.app.serial.ui.activity.CalibrationActivity$3$1 -> com.sysout.app.serial.ui.activity.CalibrationActivity$c$a:
+    com.sysout.app.serial.ui.activity.CalibrationActivity$3 this$1 -> a
 com.sysout.app.serial.ui.activity.CalibrationActivity$4 -> com.sysout.app.serial.ui.activity.CalibrationActivity$d:
     com.sysout.app.serial.ui.activity.CalibrationActivity this$0 -> b
     java.lang.String val$portStatus -> a
 com.sysout.app.serial.ui.activity.CalibrationActivity$5 -> com.sysout.app.serial.ui.activity.CalibrationActivity$e:
+    com.sysout.app.serial.ui.activity.CalibrationActivity this$0 -> b
+    java.lang.String val$portStatus -> a
+com.sysout.app.serial.ui.activity.CalibrationActivity$6 -> com.sysout.app.serial.ui.activity.CalibrationActivity$f:
     com.sysout.app.serial.ui.activity.CalibrationActivity this$0 -> o
     void onDataReceived(byte[]) -> g
     void onSendDataReceived(byte[]) -> h
-com.sysout.app.serial.ui.activity.CalibrationActivity$5$1 -> com.sysout.app.serial.ui.activity.CalibrationActivity$e$a:
+com.sysout.app.serial.ui.activity.CalibrationActivity$6$1 -> com.sysout.app.serial.ui.activity.CalibrationActivity$f$a:
     byte[] val$buff -> a
-    com.sysout.app.serial.ui.activity.CalibrationActivity$5 this$1 -> b
-com.sysout.app.serial.ui.activity.CalibrationActivity$5$1$1 -> com.sysout.app.serial.ui.activity.CalibrationActivity$e$a$a:
-    com.sysout.app.serial.ui.activity.CalibrationActivity$5$1 this$2 -> a
+    com.sysout.app.serial.ui.activity.CalibrationActivity$6 this$1 -> b
+com.sysout.app.serial.ui.activity.CalibrationActivity$6$1$1 -> com.sysout.app.serial.ui.activity.CalibrationActivity$f$a$a:
+    com.sysout.app.serial.ui.activity.CalibrationActivity$6$1 this$2 -> a
     void onHandleOrder(int,int[]) -> a
-com.sysout.app.serial.ui.activity.CalibrationActivity$5$1$1$1 -> com.sysout.app.serial.ui.activity.CalibrationActivity$e$a$a$a:
-    com.sysout.app.serial.ui.activity.CalibrationActivity$5$1$1 this$3 -> a
-com.sysout.app.serial.ui.activity.CalibrationActivity$5$1$1$2 -> com.sysout.app.serial.ui.activity.CalibrationActivity$e$a$a$b:
-    com.sysout.app.serial.ui.activity.CalibrationActivity$5$1$1 this$3 -> a
-com.sysout.app.serial.ui.activity.CalibrationActivity$5$2 -> com.sysout.app.serial.ui.activity.CalibrationActivity$e$b:
+com.sysout.app.serial.ui.activity.CalibrationActivity$6$1$1$1 -> com.sysout.app.serial.ui.activity.CalibrationActivity$f$a$a$a:
+    com.sysout.app.serial.ui.activity.CalibrationActivity$6$1$1 this$3 -> a
+com.sysout.app.serial.ui.activity.CalibrationActivity$6$1$1$2 -> com.sysout.app.serial.ui.activity.CalibrationActivity$f$a$a$b:
+    com.sysout.app.serial.ui.activity.CalibrationActivity$6$1$1 this$3 -> a
+com.sysout.app.serial.ui.activity.CalibrationActivity$6$2 -> com.sysout.app.serial.ui.activity.CalibrationActivity$f$b:
+    byte[] val$buff -> a
+com.sysout.app.serial.ui.activity.ControlParamsActivity -> com.sysout.app.serial.ui.activity.ControlParamsActivity:
+    int leftNod -> n
+    android.widget.Button mBtNod -> y
+    int count -> l
+    android.widget.Button mBtShakeZero -> w
+    int right -> j
+    android.os.Handler mHandler -> s
+    int mShakeZero -> h
+    java.lang.Runnable actionNodRunnable -> v
+    int runCountNod -> G
+    android.widget.TextView mTvShakeHint -> x
+    android.widget.TextView mTvNodHint -> E
+    android.widget.Button mBtRight -> e
+    android.widget.Button mBtNodRepeatCount -> D
+    android.widget.Button mBtShake -> c
+    int countNod -> q
+    android.widget.Button mBtNodRight -> B
+    java.lang.Runnable actionRunnable -> u
+    int rightNod -> o
+    int mNodZero -> m
+    android.os.Handler mHandlerNod -> t
+    boolean isBottom -> I
+    int time -> k
+    int left -> i
+    android.widget.Button mBtNodZero -> z
+    int runCount -> F
+    com.sysout.app.serial.utils.SerialHelper serialHelper -> a
+    android.widget.Button mBtRepeatCount -> r
+    android.widget.Button mBtTime -> f
+    android.content.SharedPreferences mPreferences -> g
+    android.widget.Button mBtNodLeft -> A
+    boolean isRight -> H
+    android.widget.Button mBtLeft -> d
+    int timeNod -> p
+    android.widget.Button mBtNodTime -> C
+    android.widget.Button mBtBack -> b
+    void lambda$initShake$5(android.view.View) -> A
+    void lambda$initShake$5$ControlParamsActivity(android.view.View) -> B
+    void lambda$initShake$6(android.view.View) -> C
+    void lambda$initShake$6$ControlParamsActivity(android.view.View) -> D
+    void lambda$onCreate$0(android.view.View) -> E
+    void lambda$onCreate$0$ControlParamsActivity(android.view.View) -> F
+    int open(java.lang.String,int) -> G
+    void refreshNod() -> H
+    void refreshShake() -> I
+    void send() -> J
+    void sendNod() -> K
+    boolean serialOpened() -> L
+    void toast(java.lang.String) -> M
+    int access$010(com.sysout.app.serial.ui.activity.ControlParamsActivity) -> a
+    int access$110(com.sysout.app.serial.ui.activity.ControlParamsActivity) -> b
+    java.lang.String getPeople(float) -> c
+    void initNod() -> d
+    void initShake() -> e
+    void initView() -> f
+    void lambda$initNod$10(android.view.View) -> g
+    void lambda$initNod$10$ControlParamsActivity(android.view.View) -> h
+    void lambda$initNod$11(android.view.View) -> i
+    void lambda$initNod$11$ControlParamsActivity(android.view.View) -> j
+    void lambda$initNod$12(android.view.View) -> k
+    void lambda$initNod$12$ControlParamsActivity(android.view.View) -> l
+    void lambda$initNod$7(android.view.View) -> m
+    void lambda$initNod$7$ControlParamsActivity(android.view.View) -> n
+    void lambda$initNod$8(android.view.View) -> o
+    void lambda$initNod$8$ControlParamsActivity(android.view.View) -> p
+    void lambda$initNod$9(android.view.View) -> q
+    void lambda$initNod$9$ControlParamsActivity(android.view.View) -> r
+    void lambda$initShake$1(android.view.View) -> s
+    void lambda$initShake$1$ControlParamsActivity(android.view.View) -> t
+    void lambda$initShake$2(android.view.View) -> u
+    void lambda$initShake$2$ControlParamsActivity(android.view.View) -> v
+    void lambda$initShake$3(android.view.View) -> w
+    void lambda$initShake$3$ControlParamsActivity(android.view.View) -> x
+    void lambda$initShake$4(android.view.View) -> y
+    void lambda$initShake$4$ControlParamsActivity(android.view.View) -> z
+com.sysout.app.serial.ui.activity.ControlParamsActivity$1 -> com.sysout.app.serial.ui.activity.ControlParamsActivity$a:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity this$0 -> a
+com.sysout.app.serial.ui.activity.ControlParamsActivity$2 -> com.sysout.app.serial.ui.activity.ControlParamsActivity$b:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity this$0 -> a
+com.sysout.app.serial.ui.activity.ControlParamsActivity$3 -> com.sysout.app.serial.ui.activity.ControlParamsActivity$c:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity this$0 -> a
+com.sysout.app.serial.ui.activity.ControlParamsActivity$4 -> com.sysout.app.serial.ui.activity.ControlParamsActivity$d:
+    com.sysout.app.serial.ui.activity.ControlParamsActivity this$0 -> o
+    void onDataReceived(byte[]) -> g
+    void onSendDataReceived(byte[]) -> h
+com.sysout.app.serial.ui.activity.ControlParamsActivity$4$1 -> com.sysout.app.serial.ui.activity.ControlParamsActivity$d$a:
+    byte[] val$buff -> a
+com.sysout.app.serial.ui.activity.ControlParamsActivity$4$1$1 -> com.sysout.app.serial.ui.activity.ControlParamsActivity$d$a$a:
+    void onHandleOrder(int,int[]) -> a
+com.sysout.app.serial.ui.activity.ControlParamsActivity$4$2 -> com.sysout.app.serial.ui.activity.ControlParamsActivity$d$b:
     byte[] val$buff -> a
 com.sysout.app.serial.ui.activity.FeaturesActivity -> com.sysout.app.serial.ui.activity.FeaturesActivity:
     void initView() -> a
@@ -2223,34 +2353,44 @@ com.sysout.app.serial.ui.activity.PortHomeActivity -> com.sysout.app.serial.ui.a
     android.widget.Button mTvTestParse -> h
     android.widget.Button mEchoPeripheral01 -> g
     android.widget.Button mEchoHost01 -> f
+    android.widget.Button mBtPage04 -> k
     android.widget.Button mBtPage03 -> j
     android.widget.Button mBtBack -> a
     android.widget.TextView mTvTextParseResult -> i
     android.widget.Button mEchoPeripheral -> e
     android.widget.Button mEchoHost -> d
     android.widget.Button mBtPage02 -> c
+    float lv -> m
     android.widget.Button mBtPage01 -> b
+    android.widget.TextView mTvDpi -> l
     android.widget.TextView access$000(com.sysout.app.serial.ui.activity.PortHomeActivity) -> a
-    void initView() -> b
-    void lambda$initView$0(android.view.View) -> c
-    void lambda$initView$0$PortHomeActivity(android.view.View) -> d
-    void lambda$initView$1(android.view.View) -> e
-    void lambda$initView$1$PortHomeActivity(android.view.View) -> f
-    void lambda$initView$2(android.view.View) -> g
-    void lambda$initView$2$PortHomeActivity(android.view.View) -> h
-    void lambda$initView$3(android.view.View) -> i
-    void lambda$initView$3$PortHomeActivity(android.view.View) -> j
-    void lambda$initView$4(android.view.View) -> k
-    void lambda$initView$4$PortHomeActivity(android.view.View) -> l
-    void lambda$initView$5(android.view.View) -> m
-    void lambda$initView$5$PortHomeActivity(android.view.View) -> n
-    void lambda$initView$6(android.view.View) -> o
-    void lambda$initView$7(android.view.View) -> p
-    void lambda$initView$8(android.view.View) -> q
-    void lambda$initView$8$PortHomeActivity(android.view.View) -> r
+    float getFontScale() -> b
+    void initView() -> c
+    void lambda$initView$0(android.view.View) -> d
+    void lambda$initView$0$PortHomeActivity(android.view.View) -> e
+    void lambda$initView$1(android.view.View) -> f
+    void lambda$initView$1$PortHomeActivity(android.view.View) -> g
+    void lambda$initView$10(android.view.View) -> h
+    void lambda$initView$10$PortHomeActivity(android.view.View) -> i
+    void lambda$initView$2(android.view.View) -> j
+    void lambda$initView$2$PortHomeActivity(android.view.View) -> k
+    void lambda$initView$3(android.view.View) -> l
+    void lambda$initView$3$PortHomeActivity(android.view.View) -> m
+    void lambda$initView$4(android.view.View) -> n
+    void lambda$initView$4$PortHomeActivity(android.view.View) -> o
+    void lambda$initView$5(android.view.View) -> p
+    void lambda$initView$5$PortHomeActivity(android.view.View) -> q
+    void lambda$initView$6(android.view.View) -> r
+    void lambda$initView$6$PortHomeActivity(android.view.View) -> s
+    void lambda$initView$7(android.view.View) -> t
+    void lambda$initView$7$PortHomeActivity(android.view.View) -> u
+    void lambda$initView$8(android.view.View) -> v
+    void lambda$initView$9(android.view.View) -> w
 com.sysout.app.serial.ui.activity.PortHomeActivity$1 -> com.sysout.app.serial.ui.activity.PortHomeActivity$a:
+    com.sysout.app.serial.ui.activity.PortHomeActivity this$0 -> a
 com.sysout.app.serial.ui.activity.PortHomeActivity$2 -> com.sysout.app.serial.ui.activity.PortHomeActivity$b:
 com.sysout.app.serial.ui.activity.PortHomeActivity$3 -> com.sysout.app.serial.ui.activity.PortHomeActivity$c:
+com.sysout.app.serial.ui.activity.PortHomeActivity$4 -> com.sysout.app.serial.ui.activity.PortHomeActivity$d:
     com.sysout.app.serial.ui.activity.PortHomeActivity this$0 -> a
     void onHandleOrder(int,int[]) -> a
 com.sysout.app.serial.ui.activity.PortTestActivity -> com.sysout.app.serial.ui.activity.PortTestActivity:
@@ -2328,39 +2468,41 @@ com.sysout.app.serial.ui.activity.PortTestActivity -> com.sysout.app.serial.ui.a
     int open(java.lang.String,int) -> z
 com.sysout.app.serial.ui.activity.PortTestActivity$1 -> com.sysout.app.serial.ui.activity.PortTestActivity$a:
     com.sysout.app.serial.ui.activity.PortTestActivity this$0 -> a
-    void lambda$afterTextChanged$0(android.widget.Button,java.util.List,android.widget.EditText,android.view.View) -> a
-    void lambda$afterTextChanged$0$PortTestActivity$1(android.widget.Button,java.util.List,android.widget.EditText,android.view.View) -> b
-com.sysout.app.serial.ui.activity.PortTestActivity$1$1 -> com.sysout.app.serial.ui.activity.PortTestActivity$a$a:
-    com.sysout.app.serial.ui.activity.PortTestActivity$1 this$1 -> a
-com.sysout.app.serial.ui.activity.PortTestActivity$1$2 -> com.sysout.app.serial.ui.activity.PortTestActivity$a$b:
-    android.widget.EditText val$editText -> a
-    void onOption(int,com.sysout.app.serial.utils.Order$KeyValue) -> a
 com.sysout.app.serial.ui.activity.PortTestActivity$2 -> com.sysout.app.serial.ui.activity.PortTestActivity$b:
     com.sysout.app.serial.ui.activity.PortTestActivity this$0 -> a
+    void lambda$afterTextChanged$0(android.widget.Button,java.util.List,android.widget.EditText,android.view.View) -> a
+    void lambda$afterTextChanged$0$PortTestActivity$2(android.widget.Button,java.util.List,android.widget.EditText,android.view.View) -> b
+com.sysout.app.serial.ui.activity.PortTestActivity$2$1 -> com.sysout.app.serial.ui.activity.PortTestActivity$b$a:
+    com.sysout.app.serial.ui.activity.PortTestActivity$2 this$1 -> a
+com.sysout.app.serial.ui.activity.PortTestActivity$2$2 -> com.sysout.app.serial.ui.activity.PortTestActivity$b$b:
+    android.widget.EditText val$editText -> a
     void onOption(int,com.sysout.app.serial.utils.Order$KeyValue) -> a
 com.sysout.app.serial.ui.activity.PortTestActivity$3 -> com.sysout.app.serial.ui.activity.PortTestActivity$c:
+    com.sysout.app.serial.ui.activity.PortTestActivity this$0 -> a
+    void onOption(int,com.sysout.app.serial.utils.Order$KeyValue) -> a
+com.sysout.app.serial.ui.activity.PortTestActivity$4 -> com.sysout.app.serial.ui.activity.PortTestActivity$d:
     com.sysout.app.serial.ui.activity.PortTestActivity this$0 -> b
     java.lang.String val$senData -> a
     void onHandleOrder(int,int[]) -> a
-com.sysout.app.serial.ui.activity.PortTestActivity$4 -> com.sysout.app.serial.ui.activity.PortTestActivity$d:
+com.sysout.app.serial.ui.activity.PortTestActivity$5 -> com.sysout.app.serial.ui.activity.PortTestActivity$e:
     com.sysout.app.serial.ui.activity.PortTestActivity this$0 -> o
     void onDataReceived(byte[]) -> g
     void onSendDataReceived(byte[]) -> h
-com.sysout.app.serial.ui.activity.PortTestActivity$4$1 -> com.sysout.app.serial.ui.activity.PortTestActivity$d$a:
-    com.sysout.app.serial.ui.activity.PortTestActivity$4 this$1 -> b
+com.sysout.app.serial.ui.activity.PortTestActivity$5$1 -> com.sysout.app.serial.ui.activity.PortTestActivity$e$a:
     byte[] val$buff -> a
-com.sysout.app.serial.ui.activity.PortTestActivity$4$1$1 -> com.sysout.app.serial.ui.activity.PortTestActivity$d$a$a:
-    com.sysout.app.serial.ui.activity.PortTestActivity$4$1 this$2 -> b
+    com.sysout.app.serial.ui.activity.PortTestActivity$5 this$1 -> b
+com.sysout.app.serial.ui.activity.PortTestActivity$5$1$1 -> com.sysout.app.serial.ui.activity.PortTestActivity$e$a$a:
+    com.sysout.app.serial.ui.activity.PortTestActivity$5$1 this$2 -> b
     java.lang.String val$hexData -> a
     void onHandleOrder(int,int[]) -> a
-com.sysout.app.serial.ui.activity.PortTestActivity$4$2 -> com.sysout.app.serial.ui.activity.PortTestActivity$d$b:
-    com.sysout.app.serial.ui.activity.PortTestActivity$4 this$1 -> b
+com.sysout.app.serial.ui.activity.PortTestActivity$5$2 -> com.sysout.app.serial.ui.activity.PortTestActivity$e$b:
     byte[] val$buff -> a
-com.sysout.app.serial.ui.activity.PortTestActivity$4$2$1 -> com.sysout.app.serial.ui.activity.PortTestActivity$d$b$a:
-    com.sysout.app.serial.ui.activity.PortTestActivity$4$2 this$2 -> b
+    com.sysout.app.serial.ui.activity.PortTestActivity$5 this$1 -> b
+com.sysout.app.serial.ui.activity.PortTestActivity$5$2$1 -> com.sysout.app.serial.ui.activity.PortTestActivity$e$b$a:
+    com.sysout.app.serial.ui.activity.PortTestActivity$5$2 this$2 -> b
     java.lang.String val$hexData -> a
     void onHandleOrder(int,int[]) -> a
-com.sysout.app.serial.ui.activity.PortTestActivity$OnItemListener -> com.sysout.app.serial.ui.activity.PortTestActivity$e:
+com.sysout.app.serial.ui.activity.PortTestActivity$OnItemListener -> com.sysout.app.serial.ui.activity.PortTestActivity$f:
     void onOption(int,com.sysout.app.serial.utils.Order$KeyValue) -> a
 com.sysout.app.serial.ui.activity.PortTestActivity$OptionAdapter -> com.sysout.app.serial.ui.activity.PortTestActivity$OptionAdapter:
     java.util.List dataList -> a
@@ -2509,7 +2651,12 @@ com.sysout.app.serial.utils.CommandExecution$CommandResult -> com.sysout.app.ser
     java.lang.String successMsg -> c
     java.lang.String errorMsg -> b
     int result -> a
-com.sysout.app.serial.utils.DBUtils -> com.sysout.app.serial.c.c:
+com.sysout.app.serial.utils.ControlActuator -> com.sysout.app.serial.c.c:
+    int getNod(android.content.Context) -> a
+    int getShake(android.content.Context) -> b
+    void writeNod(android.content.Context,int) -> c
+    void writeShake(android.content.Context,int) -> d
+com.sysout.app.serial.utils.DBUtils -> com.sysout.app.serial.c.d:
     com.sysout.app.serial.db.DaoSession daoSession -> d
     com.sysout.app.serial.utils.MyOpenHelper myOpenHelper -> a
     android.database.sqlite.SQLiteDatabase db -> c
@@ -2519,17 +2666,17 @@ com.sysout.app.serial.utils.DBUtils -> com.sysout.app.serial.c.c:
     com.sysout.app.serial.utils.DBUtils getInstance() -> b
     boolean initDB(android.content.Context) -> c
     void setUpDataBase(android.content.Context) -> d
-com.sysout.app.serial.utils.MathUtil -> com.sysout.app.serial.c.d:
+com.sysout.app.serial.utils.MathUtil -> com.sysout.app.serial.c.e:
     java.lang.String byte2Hex(java.lang.Byte) -> a
     java.lang.String bytesToHex(byte[]) -> b
     byte[] hexString2Bytes(java.lang.String) -> c
     int parse(char) -> d
-com.sysout.app.serial.utils.MyOpenHelper -> com.sysout.app.serial.c.e:
+com.sysout.app.serial.utils.MyOpenHelper -> com.sysout.app.serial.c.f:
     void onUpgrade(org.greenrobot.greendao.database.Database,int,int) -> c
-com.sysout.app.serial.utils.MyOpenHelper$1 -> com.sysout.app.serial.c.e$a:
+com.sysout.app.serial.utils.MyOpenHelper$1 -> com.sysout.app.serial.c.f$a:
     void onCreateAllTables(org.greenrobot.greendao.database.Database,boolean) -> a
     void onDropAllTables(org.greenrobot.greendao.database.Database,boolean) -> b
-com.sysout.app.serial.utils.Order -> com.sysout.app.serial.c.f:
+com.sysout.app.serial.utils.Order -> com.sysout.app.serial.c.g:
     com.sysout.app.serial.utils.Order$Option[] options -> c
     java.util.List values -> f
     int[] paramsLens -> b
@@ -2538,24 +2685,24 @@ com.sysout.app.serial.utils.Order -> com.sysout.app.serial.c.f:
     java.util.HashMap orderMap -> e
     java.util.HashMap getOrderMap() -> a
     java.util.List getValues() -> b
-com.sysout.app.serial.utils.Order$1 -> com.sysout.app.serial.c.f$a:
+com.sysout.app.serial.utils.Order$1 -> com.sysout.app.serial.c.g$a:
     int compare(com.sysout.app.serial.utils.Order$KeyValue,com.sysout.app.serial.utils.Order$KeyValue) -> a
-com.sysout.app.serial.utils.Order$KeyValue -> com.sysout.app.serial.c.f$b:
+com.sysout.app.serial.utils.Order$KeyValue -> com.sysout.app.serial.c.g$b:
     java.lang.String value -> b
     int key -> a
-com.sysout.app.serial.utils.Order$Option -> com.sysout.app.serial.c.f$c:
+com.sysout.app.serial.utils.Order$Option -> com.sysout.app.serial.c.g$c:
     java.util.TreeMap optionMap -> a
     java.lang.String info -> b
     com.sysout.app.serial.utils.Order$Option add(java.lang.String,int) -> a
     java.util.List getValues() -> b
-com.sysout.app.serial.utils.SerialDataUtils -> com.sysout.app.serial.c.g:
+com.sysout.app.serial.utils.SerialDataUtils -> com.sysout.app.serial.c.h:
     java.lang.String Byte2Hex(java.lang.Byte) -> a
     java.lang.String ByteArrToHex(byte[]) -> b
     byte HexToByte(java.lang.String) -> c
     byte[] HexToByteArr2(java.lang.String) -> d
     java.lang.String Int2Hex(int) -> e
     int isOdd(int) -> f
-com.sysout.app.serial.utils.SerialHelper -> com.sysout.app.serial.c.h:
+com.sysout.app.serial.utils.SerialHelper -> com.sysout.app.serial.c.i:
     int iDelay -> n
     java.lang.String sPort -> f
     android_serialport_api.SerialPort mSerialPort -> a
@@ -2585,15 +2732,15 @@ com.sysout.app.serial.utils.SerialHelper -> com.sysout.app.serial.c.h:
     void setiDelay(int) -> m
     void startSend() -> n
     void stopSend() -> o
-com.sysout.app.serial.utils.SerialHelper$1 -> com.sysout.app.serial.c.h$a:
-com.sysout.app.serial.utils.SerialHelper$ReadThread -> com.sysout.app.serial.c.h$b:
+com.sysout.app.serial.utils.SerialHelper$1 -> com.sysout.app.serial.c.i$a:
+com.sysout.app.serial.utils.SerialHelper$ReadThread -> com.sysout.app.serial.c.i$b:
     com.sysout.app.serial.utils.SerialHelper this$0 -> a
-com.sysout.app.serial.utils.SerialHelper$SendThread -> com.sysout.app.serial.c.h$c:
+com.sysout.app.serial.utils.SerialHelper$SendThread -> com.sysout.app.serial.c.i$c:
     com.sysout.app.serial.utils.SerialHelper this$0 -> b
     boolean suspendFlag -> a
     void setResume() -> a
     void setSuspendFlag() -> b
-com.sysout.app.serial.utils.SerialPortUtil -> com.sysout.app.serial.c.i:
+com.sysout.app.serial.utils.SerialPortUtil -> com.sysout.app.serial.c.j:
     com.sysout.app.serial.utils.SerialPortUtil$ParseDataListener parseDataListener -> c
     java.lang.String TAG -> a
     java.lang.String HEAD_STR -> b
@@ -2601,7 +2748,7 @@ com.sysout.app.serial.utils.SerialPortUtil -> com.sysout.app.serial.c.i:
     void onHandleOrder(int,int[]) -> b
     void parseOrder(java.lang.String) -> c
     void setParseDataListener(com.sysout.app.serial.utils.SerialPortUtil$ParseDataListener) -> d
-com.sysout.app.serial.utils.SerialPortUtil$ParseDataListener -> com.sysout.app.serial.c.i$a:
+com.sysout.app.serial.utils.SerialPortUtil$ParseDataListener -> com.sysout.app.serial.c.j$a:
     void onHandleOrder(int,int[]) -> a
 com.tencent.bugly.beta.download.b -> com.tencent.bugly.beta.download.BetaReceiver$a:
 com.tencent.bugly.beta.tinker.TinkerLoadReporter$1 -> com.tencent.bugly.beta.tinker.TinkerLoadReporter$a:

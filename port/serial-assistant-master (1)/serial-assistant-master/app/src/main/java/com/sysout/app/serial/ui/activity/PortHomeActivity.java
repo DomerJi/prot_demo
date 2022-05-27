@@ -2,18 +2,25 @@ package com.sysout.app.serial.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.pl.sphelper.SPHelper;
 import com.sysout.app.serial.R;
 import com.sysout.app.serial.utils.CommandExecution;
-import com.sysout.app.serial.utils.Order;
 import com.sysout.app.serial.utils.SerialDataUtils;
 import com.sysout.app.serial.utils.SerialPortUtil;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.Set;
 
 public class PortHomeActivity extends AppCompatActivity {
 
@@ -31,12 +38,24 @@ public class PortHomeActivity extends AppCompatActivity {
     private Button mTvTestParse;
     private TextView mTvTextParseResult;
     private Button mBtPage03;
+    private Button mBtPage04;
+    private TextView mTvDpi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_port_home);
         initView();
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("串口Demo");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initView() {
@@ -44,6 +63,14 @@ public class PortHomeActivity extends AppCompatActivity {
         mBtPage01 = (Button) findViewById(R.id.bt_page_01);
         mBtPage02 = (Button) findViewById(R.id.bt_page_02);
         mBtPage03 = (Button) findViewById(R.id.bt_page_03);
+        mBtPage04 = (Button) findViewById(R.id.bt_page_04);
+        mTvDpi = (TextView) findViewById(R.id.tv_dpi);
+        mTvDpi.setText("dpi = " + getResources().getDisplayMetrics().densityDpi
+                + "\nFontScale = " + getFontScale());
+
+        mTvDpi.setOnClickListener(v -> {
+            getValue(mTvDpi);
+        });
         mBtBack.setOnClickListener(v -> {
             finish();
         });
@@ -55,6 +82,9 @@ public class PortHomeActivity extends AppCompatActivity {
         });
         mBtPage03.setOnClickListener(v -> {
             startActivity(new Intent(PortHomeActivity.this, CalibrationActivity.class));
+        });
+        mBtPage04.setOnClickListener(v -> {
+            startActivity(new Intent(PortHomeActivity.this, ControlParamsActivity.class));
         });
         /**
          * echo host > /sys/devices/platform/usb0/dwc3_mode
@@ -130,4 +160,58 @@ public class PortHomeActivity extends AppCompatActivity {
         });
 
     }
+
+    private static float lv = 0;
+
+    public float getFontScale() {
+        if (lv > 0) {
+            return lv;
+        }
+
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        int screenDensity = dm.densityDpi;
+        lv = 1.0f * DisplayMetrics.DENSITY_XHIGH / screenDensity;
+        if (DisplayMetrics.DENSITY_XHIGH >= screenDensity) {
+            // 华为平板 6.25 = 2000/320
+            lv = lv * Math.max(dm.widthPixels, dm.heightPixels) * 1.0f / screenDensity / 6.25f;
+        }
+        return lv;
+    }
+
+    public void getValue(View view) {
+        long start = System.currentTimeMillis();
+
+        Map<String, ?> map = SPHelper.getAll();
+
+//        String result1 = "a="+SPHelper.getInt("a",0);
+//        String result2 = "b="+SPHelper.getString("b","");
+//
+//        Set<String> set = SPHelper.getStringSet("c",null);
+
+        long end = System.currentTimeMillis();
+        Toast.makeText(this, "takes " + (end - start) + "millis", Toast.LENGTH_SHORT).show();
+
+        String result = "";
+        for (Map.Entry<String, ?> entry : map.entrySet()) {
+            String k = entry.getKey();
+            Object v = entry.getValue();
+            if (v instanceof Set) {
+                String result3 = "";
+                for (String string : (Set<String>) v) {
+                    result3 += "\"" + string + "\"";
+                    result3 += "    ";
+                }
+                v = result3;
+            }
+            result += k + "=" + v + "\n";
+        }
+
+        if (TextUtils.isEmpty(result)) {
+            result = "result is null";
+        }
+        mTvDpi.setText(mTvDpi.getText().toString() + "\n" + result);
+
+    }
+
+
 }
