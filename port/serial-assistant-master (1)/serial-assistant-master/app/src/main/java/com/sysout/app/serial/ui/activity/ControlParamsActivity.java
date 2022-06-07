@@ -13,8 +13,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.pl.sphelper.ConstantUtil;
+import com.pl.sphelper.SPHelper;
 import com.sysout.app.serial.R;
-import com.sysout.app.serial.utils.ControlActuator;
 import com.sysout.app.serial.utils.Order;
 import com.sysout.app.serial.utils.SerialDataUtils;
 import com.sysout.app.serial.utils.SerialHelper;
@@ -38,7 +39,7 @@ public class ControlParamsActivity extends AppCompatActivity {
     private static final String KEY_SHAKE_TIME = "shake.time";
     private static final String KEY_SHAKE_COUNT = "shake.count";
     private static final String KEY_SHAKE_OFFSET = "shake.offset";
-    private int mShakeZero = -9999;
+    private int mShakeZero = ConstantUtil.DEFAULT_INT;
     private int mShakeZeroOffset = 0;
 
     private int left;
@@ -51,7 +52,7 @@ public class ControlParamsActivity extends AppCompatActivity {
     private static final String KEY_NOD_TIME = "nod.time";
     private static final String KEY_NOD_COUNT = "nod.count";
     private static final String KEY_NOD_OFFSET = "nod.offset";
-    private int mNodZero = -9999;
+    private int mNodZero = ConstantUtil.DEFAULT_INT;
     private int mNodZeroOffset = -100;
     private int leftNod;
     private int rightNod;
@@ -124,9 +125,9 @@ public class ControlParamsActivity extends AppCompatActivity {
     private void initShake() {
 
         mBtShake.setOnClickListener(v -> {
-            mShakeZero = ControlActuator.getShake(getApplicationContext());
-//            mShakeZero = 0;
-            if (mShakeZero == -9999) {
+
+            mShakeZero = SPHelper.getInt(ConstantUtil.Key.SHAKE_ZERO);
+            if (ConstantUtil.isDefault(mShakeZero)) {
                 toast("请先获取摇头零位");
                 return;
             }
@@ -170,8 +171,8 @@ public class ControlParamsActivity extends AppCompatActivity {
         });
 
         mBtShakeZero.setOnClickListener(v -> {
-            mShakeZero = ControlActuator.getShake(getApplicationContext());
-            if (mShakeZero == -9999) {
+            mShakeZero = SPHelper.getInt(ConstantUtil.Key.SHAKE_ZERO);
+            if (ConstantUtil.isDefault(mShakeZero)) {
                 toast("请先获取摇头零位");
                 return;
             }
@@ -200,9 +201,8 @@ public class ControlParamsActivity extends AppCompatActivity {
     private void initNod() {
 
         mBtNod.setOnClickListener(v -> {
-            mNodZero = ControlActuator.getNod(getApplicationContext());
-//            mNodZero = 0;
-            if (mNodZero == -9999) {
+            mNodZero = SPHelper.getInt(ConstantUtil.Key.NOD_ZERO);
+            if (ConstantUtil.isDefault(mNodZero)) {
                 toast("请先获取点头零位");
                 return;
             }
@@ -246,8 +246,8 @@ public class ControlParamsActivity extends AppCompatActivity {
         });
 
         mBtNodZero.setOnClickListener(v -> {
-            mNodZero = ControlActuator.getNod(getApplicationContext());
-            if (mNodZero == -9999) {
+            mNodZero = SPHelper.getInt(ConstantUtil.Key.NOD_ZERO);
+            if (ConstantUtil.isDefault(mNodZero)) {
                 toast("请先获取点头零位");
                 return;
             }
@@ -364,7 +364,7 @@ public class ControlParamsActivity extends AppCompatActivity {
         mBtLeft.setText("左:" + getPeople(left / 10f));
         mBtRight.setText("右:" + getPeople(right / 10f));
         mBtRepeatCount.setText("次数:" + count);
-        if (mShakeZero != -9999) {
+        if (ConstantUtil.isNotDefault(mShakeZero)) {
             mBtShakeZero.setText("归零[" + getPeople(mShakeZero / 10f) + "]");
         }
         mBtShakeOffset.setText("偏移[" + getPeople(mShakeZeroOffset / 10f) + "]");
@@ -381,7 +381,7 @@ public class ControlParamsActivity extends AppCompatActivity {
         mBtNodLeft.setText("上:" + getPeople(leftNod / 10f));
         mBtNodRight.setText("下:" + getPeople(rightNod / 10f));
         mBtNodRepeatCount.setText("次数:" + countNod);
-        if (mNodZero != -9999) {
+        if (ConstantUtil.isNotDefault(mNodZero)) {
             mBtNodZero.setText("归零[" + getPeople(mNodZero / 10f) + "]");
         }
         mBtNodOffset.setText("偏移[" + getPeople(mNodZeroOffset / 10f) + "]");

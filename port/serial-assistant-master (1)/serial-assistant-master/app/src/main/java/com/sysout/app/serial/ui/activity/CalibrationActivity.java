@@ -12,8 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.pl.sphelper.ConstantUtil;
+import com.pl.sphelper.SPHelper;
 import com.sysout.app.serial.R;
-import com.sysout.app.serial.utils.ControlActuator;
 import com.sysout.app.serial.utils.Order;
 import com.sysout.app.serial.utils.SerialDataUtils;
 import com.sysout.app.serial.utils.SerialHelper;
@@ -21,7 +22,6 @@ import com.sysout.app.serial.utils.SerialPortUtil;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.HashMap;
 
 public class CalibrationActivity extends AppCompatActivity {
 
@@ -39,20 +39,20 @@ public class CalibrationActivity extends AppCompatActivity {
     private SerialHelper serialHelper;
     private TextView mTvPortStatus;
 
-    private HashMap<Integer, Boolean> mCheckMap = new HashMap<>();
 
     Handler mHandler = new Handler(Looper.getMainLooper());
-    int sHakeLeft = -9999;
-    int sHakeRight = -9999;
-    int getsHakeLeftMax = -9999;
-    int getsHakeRightMax = -9999;
-    int mZeroValue = -9999;
+    int sHakeLeft = ConstantUtil.DEFAULT_INT;
+    int sHakeRight = ConstantUtil.DEFAULT_INT;
+    int getsHakeLeftMax = ConstantUtil.DEFAULT_INT;
+    int getsHakeRightMax = ConstantUtil.DEFAULT_INT;
+    int mZeroValue = ConstantUtil.DEFAULT_INT;
 
-    int nodLeft = -9999;
-    int nodRight = -9999;
-    int getNodLeftMax = -9999;
-    int getNodRightMax = -9999;
-    int mNodZeroValue = -9999;
+    int nodLeft = ConstantUtil.DEFAULT_INT;
+    int nodRight = ConstantUtil.DEFAULT_INT;
+    int getNodLeftMax = ConstantUtil.DEFAULT_INT;
+    int getNodRightMax = ConstantUtil.DEFAULT_INT;
+    int mNodZeroValue = ConstantUtil.DEFAULT_INT;
+    int mRotateZeroValue = ConstantUtil.DEFAULT_INT;
 
     private Button mBtDownElectricity;
     private Button mBtUpElectricity;
@@ -68,6 +68,11 @@ public class CalibrationActivity extends AppCompatActivity {
     private Button mBtNodZero;
     private TextView mTvNodHint;
     private TextView mTvHistory;
+    private Toolbar mToolbar;
+    private TextView mTvRotateTitle;
+    private Button mBtRotateCalibration;
+    private TextView mTvRotateZero;
+    private Button mBtRotateZero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,39 +103,54 @@ public class CalibrationActivity extends AppCompatActivity {
 
     private void refreshHistory() {
 
-        getNodRightMax = ControlActuator.get(getApplicationContext(), "getNodRightMax");
-        getNodLeftMax = ControlActuator.get(getApplicationContext(), "getNodLeftMax");
-        getsHakeRightMax = ControlActuator.get(getApplicationContext(), "getsHakeRightMax");
-        getsHakeLeftMax = ControlActuator.get(getApplicationContext(), "getsHakeLeftMax");
+        getNodRightMax = SPHelper.getInt(ConstantUtil.Key.NOD_RIGHT_MAX);
+        getNodLeftMax = SPHelper.getInt(ConstantUtil.Key.NOD_LEFT_MAX);
+        getsHakeRightMax = SPHelper.getInt(ConstantUtil.Key.SHAKE_RIGHT_MAX);
+        getsHakeLeftMax = SPHelper.getInt(ConstantUtil.Key.SHAKE_LEFT_MAX);
 
         StringBuilder sb = new StringBuilder();
-        if (mZeroValue != -9999) {
+        if (ConstantUtil.isNotDefault(mZeroValue)) {
             sb.append("shake:" + mZeroValue);
         }
-        if (mNodZeroValue != -9999) {
-            sb.append("nod:" + mNodZeroValue);
+        if (ConstantUtil.isNotDefault(mNodZeroValue)) {
+            sb.append("_nod:" + mNodZeroValue);
         }
-        if (getsHakeLeftMax != -9999) {
-            sb.append("left:" + getsHakeLeftMax);
+        if (ConstantUtil.isNotDefault(mRotateZeroValue)) {
+            sb.append("_rotate:" + mRotateZeroValue);
         }
-        if (getsHakeRightMax != -9999) {
-            sb.append("right:" + getsHakeRightMax);
+        if (ConstantUtil.isNotDefault(getsHakeLeftMax)) {
+            sb.append("_left:" + getsHakeLeftMax);
+            mTvShakeLeftValue.setText(getPeople(getsHakeLeftMax / 10f) + "度");
+        } else {
+            mTvShakeLeftValue.setText("- -");
         }
-        if (getNodLeftMax != -9999) {
-            sb.append("top:" + getNodLeftMax);
+        if (ConstantUtil.isNotDefault(getsHakeRightMax)) {
+            sb.append("_right:" + getsHakeRightMax);
+            mTvShakeRightValue.setText(getPeople(getsHakeRightMax / 10f) + "度");
+        } else {
+            mTvShakeRightValue.setText("- -");
         }
-        if (getNodRightMax != -9999) {
-            sb.append("bottom:" + getNodRightMax);
+        if (ConstantUtil.isNotDefault(getNodLeftMax)) {
+            sb.append("_top:" + getNodLeftMax);
+            mTvNodLeftValue.setText(getPeople(getNodLeftMax / 10f) + "度");
+        } else {
+            mTvNodLeftValue.setText("- -");
+        }
+        if (ConstantUtil.isNotDefault(getNodRightMax)) {
+            sb.append("_bottom:" + getNodRightMax);
+            mTvNodRightValue.setText(getPeople(getNodRightMax / 10f) + "度");
+        } else {
+            mTvNodRightValue.setText("- -");
         }
 
         sb.append("点击清空极限位");
 
         mTvHistory.setText(sb.toString());
         mTvHistory.setOnClickListener(v -> {
-            ControlActuator.put(getApplicationContext(), "getsHakeLeftMax", -9999);
-            ControlActuator.put(getApplicationContext(), "getsHakeRightMax", -9999);
-            ControlActuator.put(getApplicationContext(), "getNodLeftMax", -9999);
-            ControlActuator.put(getApplicationContext(), "getNodRightMax", -9999);
+            SPHelper.remove(ConstantUtil.Key.NOD_RIGHT_MAX);
+            SPHelper.remove(ConstantUtil.Key.NOD_LEFT_MAX);
+            SPHelper.remove(ConstantUtil.Key.SHAKE_RIGHT_MAX);
+            SPHelper.remove(ConstantUtil.Key.SHAKE_LEFT_MAX);
             refreshHistory();
             Toast.makeText(CalibrationActivity.this, "已清空", Toast.LENGTH_SHORT).show();
 
@@ -170,11 +190,36 @@ public class CalibrationActivity extends AppCompatActivity {
         });
 
         mTvHistory = findViewById(R.id.tv_history);
-        mNodZeroValue = ControlActuator.getNod(getApplicationContext());
-        mZeroValue = ControlActuator.getShake(getApplicationContext());
+        mNodZeroValue = SPHelper.getInt(ConstantUtil.Key.NOD_ZERO);
+        mZeroValue = SPHelper.getInt(ConstantUtil.Key.SHAKE_ZERO);
+        mRotateZeroValue = SPHelper.getInt(ConstantUtil.Key.ROTATE_ZERO);
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mTvRotateTitle = (TextView) findViewById(R.id.tv_rotate_title);
+        mBtRotateCalibration = (Button) findViewById(R.id.bt_rotate_calibration);
+        mTvRotateZero = (TextView) findViewById(R.id.tv_rotate_zero);
+        mBtRotateZero = (Button) findViewById(R.id.bt_rotate_zero);
+
         refreshHistory();
         initShake();
         initNod();
+        initRotate();
+    }
+
+    private void initRotate() {
+        mBtRotateCalibration.setOnClickListener(v -> {
+            send(9, Order.DOWN_STATE, 4);
+        });
+        mBtRotateZero.setOnClickListener(v -> {
+            if (serialOpened()) {
+                if (ConstantUtil.isDefault(mRotateZeroValue)) {
+                    Toast.makeText(CalibrationActivity.this, "请先校准获取零位", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(CalibrationActivity.this, "转到零位:" + (getPeople(mRotateZeroValue / 10f)), Toast.LENGTH_SHORT).show();
+                serialHelper.sendHex(SerialPortUtil.getSendData(Order.DOWN_SERVO_STATE, 2, mRotateZeroValue, 5000));
+            }
+        });
     }
 
 
@@ -189,7 +234,7 @@ public class CalibrationActivity extends AppCompatActivity {
         });
 
         mBtShakeCalibration.setOnClickListener(v -> {
-            if (getsHakeLeftMax == -9999 || getsHakeRightMax == -9999) {
+            if (ConstantUtil.isDefault(getsHakeLeftMax) || ConstantUtil.isDefault(getsHakeRightMax)) {
                 Toast.makeText(CalibrationActivity.this, "请先获取左右极限位", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -222,7 +267,7 @@ public class CalibrationActivity extends AppCompatActivity {
         });
         mBtShakeZero.setOnClickListener(v -> {
             if (serialOpened()) {
-                if (mZeroValue == -9999) {
+                if (ConstantUtil.isDefault(mZeroValue)) {
                     Toast.makeText(CalibrationActivity.this, "请先校准获取零位", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -244,7 +289,7 @@ public class CalibrationActivity extends AppCompatActivity {
         });
 
         mBtNodCalibration.setOnClickListener(v -> {
-            if (getNodLeftMax == -9999 || getNodRightMax == -9999) {
+            if (ConstantUtil.isDefault(getNodLeftMax) || ConstantUtil.isDefault(getNodRightMax)) {
                 Toast.makeText(CalibrationActivity.this, "请先获取上下极限位", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -277,12 +322,12 @@ public class CalibrationActivity extends AppCompatActivity {
         });
         mBtNodZero.setOnClickListener(v -> {
             if (serialOpened()) {
-                if (mNodZeroValue == -9999) {
+                if (ConstantUtil.isDefault(mNodZeroValue)) {
                     Toast.makeText(CalibrationActivity.this, "请先校准获取零位", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Toast.makeText(CalibrationActivity.this, "转到零位:" + (getPeople(mNodZeroValue / 10f)), Toast.LENGTH_SHORT).show();
-                serialHelper.sendHex(SerialPortUtil.getSendData(Order.DOWN_SERVO_STATE, 1, mNodZeroValue, 5000));
+                serialHelper.sendHex(SerialPortUtil.getSendData(Order.DOWN_SERVO_STATE, 3, mNodZeroValue, 5000));
             }
         });
     }
@@ -386,27 +431,28 @@ public class CalibrationActivity extends AppCompatActivity {
                                                 float angle = bytes[3] / 10f;
                                                 mTvShakeLeftValue.setText(getPeople(angle) + "度");
                                                 getsHakeLeftMax = bytes[3];
-                                                ControlActuator.put(CalibrationActivity.this, "getsHakeLeftMax", getsHakeLeftMax);
-                                                mCheckMap.put(getIndex, true);
+                                                SPHelper.save(ConstantUtil.Key.SHAKE_LEFT_MAX, getsHakeLeftMax);
                                             } else if (getIndex == 1) {
                                                 float angle = bytes[3] / 10f;
                                                 mTvShakeRightValue.setText(getPeople(angle) + "度");
                                                 getsHakeRightMax = bytes[3];
-                                                ControlActuator.put(CalibrationActivity.this, "getsHakeRightMax", getsHakeRightMax);
-                                                mCheckMap.put(getIndex, true);
+                                                SPHelper.save(ConstantUtil.Key.SHAKE_RIGHT_MAX, getsHakeRightMax);
                                                 // 点头舵机 上下极限位
                                             } else if (getIndex == 5) {
                                                 float angle = bytes[2] / 10f;
                                                 mTvNodLeftValue.setText(getPeople(angle) + "度");
                                                 getNodLeftMax = bytes[2];
-                                                ControlActuator.put(CalibrationActivity.this, "getNodLeftMax", getNodLeftMax);
-                                                mCheckMap.put(getIndex, true);
+                                                SPHelper.save(ConstantUtil.Key.NOD_LEFT_MAX, getNodLeftMax);
                                             } else if (getIndex == 6) {
                                                 float angle = bytes[2] / 10f;
                                                 mTvNodRightValue.setText(getPeople(angle) + "度");
                                                 getNodRightMax = bytes[2];
-                                                ControlActuator.put(CalibrationActivity.this, "getNodRightMax", getNodRightMax);
-                                                mCheckMap.put(getIndex, true);
+                                                SPHelper.save(ConstantUtil.Key.NOD_RIGHT_MAX, getNodRightMax);
+                                            } else if (getIndex == 9) {
+                                                float angle = bytes[4] / 10f;
+                                                mTvRotateZero.setText(getPeople(angle) + "度");
+                                                mRotateZeroValue = bytes[4];
+                                                SPHelper.save(ConstantUtil.Key.ROTATE_ZERO, mRotateZeroValue);
                                             }
                                         }
 
@@ -424,7 +470,7 @@ public class CalibrationActivity extends AppCompatActivity {
                                                 mTvShakeCalibrationValue.setText(mTvShakeCalibrationValue.getText().toString()
                                                         + "  *  left：" + getPeople(angle));
                                                 mZeroValue = (sHakeLeft + sHakeRight) / 2;
-                                                ControlActuator.writeShake(getApplicationContext(), mZeroValue);
+                                                SPHelper.save(ConstantUtil.Key.SHAKE_ZERO, mZeroValue);
                                                 mHandler.postDelayed(new Runnable() {
                                                     @Override
                                                     public void run() {
@@ -446,7 +492,7 @@ public class CalibrationActivity extends AppCompatActivity {
                                                 mTvNodCalibrationValue.setText(mTvNodCalibrationValue.getText().toString()
                                                         + "  *  top：" + getPeople(angle));
                                                 mNodZeroValue = (nodLeft + nodRight) / 2;
-                                                ControlActuator.writeNod(getApplicationContext(), mNodZeroValue);
+                                                SPHelper.save(ConstantUtil.Key.NOD_ZERO, mNodZeroValue);
                                                 mHandler.postDelayed(new Runnable() {
                                                     @Override
                                                     public void run() {

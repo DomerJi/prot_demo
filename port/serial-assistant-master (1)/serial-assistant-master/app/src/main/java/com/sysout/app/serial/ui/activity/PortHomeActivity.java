@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.pl.sphelper.ConstantUtil;
 import com.pl.sphelper.SPHelper;
 import com.sysout.app.serial.R;
 import com.sysout.app.serial.utils.CommandExecution;
@@ -20,6 +21,7 @@ import com.sysout.app.serial.utils.SerialPortUtil;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 public class PortHomeActivity extends AppCompatActivity {
@@ -182,9 +184,13 @@ public class PortHomeActivity extends AppCompatActivity {
         long start = System.currentTimeMillis();
 
         Map<String, ?> map = SPHelper.getAll();
-
-//        String result1 = "a="+SPHelper.getInt("a",0);
-//        String result2 = "b="+SPHelper.getString("b","");
+        // todo 模拟 test
+//        SPHelper.save(ConstantUtil.Key.SHAKE_ZERO, new Random().nextInt(400));
+//        SPHelper.save(ConstantUtil.Key.NOD_ZERO, new Random().nextInt(260));
+//        SPHelper.save(ConstantUtil.Key.ROTATE_ZERO, new Random().nextInt(260));
+//        String result1 = "点头=" + SPHelper.getInt(ConstantUtil.Key.NOD_ZERO);
+//        String result2 = "摇头=" + SPHelper.getInt(ConstantUtil.Key.SHAKE_ZERO);
+//        String result4 = "转身=" + SPHelper.getInt(ConstantUtil.Key.ROTATE_ZERO);
 //
 //        Set<String> set = SPHelper.getStringSet("c",null);
 
@@ -209,7 +215,10 @@ public class PortHomeActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(result)) {
             result = "result is null";
         }
-        mTvDpi.setText(mTvDpi.getText().toString() + "\n" + result);
+        mTvDpi.setText(mTvDpi.getText().toString() + "_" + result);
+//        mTvDpi.setText(mTvDpi.getText().toString() + "_" + result1);
+//        mTvDpi.setText(mTvDpi.getText().toString() + "_" + result2);
+//        mTvDpi.setText(mTvDpi.getText().toString() + "_" + result4);
 
     }
 
