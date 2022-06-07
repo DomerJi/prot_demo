@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,7 +33,7 @@ import static com.pl.sphelper.ConstantUtil.TYPE_STRING_SET;
 import static com.pl.sphelper.ConstantUtil.VALUE;
 
 public class SPHelper {
-    public static final String COMMA_REPLACEMENT="__COMMA__";
+    public static final String COMMA_REPLACEMENT = "__COMMA__";
 
     public static Context context;
 
@@ -97,9 +98,9 @@ public class SPHelper {
         ContentResolver cr = context.getContentResolver();
         Uri uri = Uri.parse(CONTENT_URI + SEPARATOR + TYPE_STRING_SET + SEPARATOR + name);
         ContentValues cv = new ContentValues();
-        Set<String> convert=new HashSet<>();
-        for (String string:t){
-            convert.add(string.replace(",",COMMA_REPLACEMENT));
+        Set<String> convert = new HashSet<>();
+        for (String string : t) {
+            convert.add(string.replace(",", COMMA_REPLACEMENT));
         }
         cv.put(VALUE, convert.toString());
         cr.update(uri, cv, null, null);
@@ -125,6 +126,10 @@ public class SPHelper {
             return defaultValue;
         }
         return Integer.parseInt(rtn);
+    }
+
+    public static int getInt(String name) {
+        return getInt(name, ConstantUtil.DEFAULT_INT);
     }
 
     public static float getFloat(String name, float defaultValue) {
@@ -169,14 +174,14 @@ public class SPHelper {
         if (rtn == null || rtn.equals(NULL_STRING)) {
             return defaultValue;
         }
-        if (!rtn.matches("\\[.*\\]")){
+        if (!rtn.matches("\\[.*\\]")) {
             return defaultValue;
         }
-        String sub=rtn.substring(1,rtn.length()-1);
-        String[] spl=sub.split(", ");
-        Set<String> returns=new HashSet<>();
-        for (String t:spl){
-            returns.add(t.replace(COMMA_REPLACEMENT,", "));
+        String sub = rtn.substring(1, rtn.length() - 1);
+        String[] spl = sub.split(", ");
+        Set<String> returns = new HashSet<>();
+        for (String t : spl) {
+            returns.add(t.replace(COMMA_REPLACEMENT, ", "));
         }
         return returns;
     }
@@ -200,53 +205,56 @@ public class SPHelper {
         cr.delete(uri, null, null);
     }
 
-    public static void clear(){
+    public static void clear() {
         checkContext();
         ContentResolver cr = context.getContentResolver();
         Uri uri = Uri.parse(CONTENT_URI + SEPARATOR + TYPE_CLEAN);
-        cr.delete(uri,null,null);
+        cr.delete(uri, null, null);
     }
 
-    public static Map<String,?> getAll(){
+    public static Map<String, ?> getAll() {
         checkContext();
         ContentResolver cr = context.getContentResolver();
         Uri uri = Uri.parse(CONTENT_URI + SEPARATOR + TYPE_GET_ALL);
-        Cursor cursor=cr.query(uri,null,null,null,null);
-        HashMap resultMap=new HashMap();
-        if (cursor!=null && cursor.moveToFirst()){
-            int nameIndex=cursor.getColumnIndex(CURSOR_COLUMN_NAME);
-            int typeIndex=cursor.getColumnIndex(CURSOR_COLUMN_TYPE);
-            int valueIndex=cursor.getColumnIndex(CURSOR_COLUMN_VALUE);
+        Cursor cursor = cr.query(uri, null, null, null, null);
+
+        Toast.makeText(context, "cursor != null " + (cursor != null), Toast.LENGTH_SHORT).show();
+        HashMap resultMap = new HashMap();
+        if (cursor != null && cursor.moveToFirst()) {
+            Toast.makeText(context, "getall", Toast.LENGTH_SHORT).show();
+            int nameIndex = cursor.getColumnIndex(CURSOR_COLUMN_NAME);
+            int typeIndex = cursor.getColumnIndex(CURSOR_COLUMN_TYPE);
+            int valueIndex = cursor.getColumnIndex(CURSOR_COLUMN_VALUE);
             do {
-                String key=cursor.getString(nameIndex);
-                String type=cursor.getString(typeIndex);
+                String key = cursor.getString(nameIndex);
+                String type = cursor.getString(typeIndex);
                 Object value = null;
                 if (type.equalsIgnoreCase(TYPE_STRING)) {
-                    value= cursor.getString(valueIndex);
-                    if (((String)value).contains(COMMA_REPLACEMENT)){
-                        String str= (String) value;
-                        if (str.matches("\\[.*\\]")){
-                            String sub=str.substring(1,str.length()-1);
-                            String[] spl=sub.split(", ");
-                            Set<String> returns=new HashSet<>();
-                            for (String t:spl){
-                                returns.add(t.replace(COMMA_REPLACEMENT,", "));
+                    value = cursor.getString(valueIndex);
+                    if (((String) value).contains(COMMA_REPLACEMENT)) {
+                        String str = (String) value;
+                        if (str.matches("\\[.*\\]")) {
+                            String sub = str.substring(1, str.length() - 1);
+                            String[] spl = sub.split(", ");
+                            Set<String> returns = new HashSet<>();
+                            for (String t : spl) {
+                                returns.add(t.replace(COMMA_REPLACEMENT, ", "));
                             }
-                            value=returns;
+                            value = returns;
                         }
                     }
                 } else if (type.equalsIgnoreCase(TYPE_BOOLEAN)) {
-                    value= cursor.getString(valueIndex);
+                    value = cursor.getString(valueIndex);
                 } else if (type.equalsIgnoreCase(TYPE_INT)) {
-                    value= cursor.getInt(valueIndex);
+                    value = cursor.getInt(valueIndex);
                 } else if (type.equalsIgnoreCase(TYPE_LONG)) {
-                    value= cursor.getLong(valueIndex);
+                    value = cursor.getLong(valueIndex);
                 } else if (type.equalsIgnoreCase(TYPE_FLOAT)) {
-                    value= cursor.getFloat(valueIndex);
+                    value = cursor.getFloat(valueIndex);
                 } else if (type.equalsIgnoreCase(TYPE_STRING_SET)) {
-                    value= cursor.getString(valueIndex);
+                    value = cursor.getString(valueIndex);
                 }
-                resultMap.put(key,value);
+                resultMap.put(key, value);
             }
             while (cursor.moveToNext());
             cursor.close();

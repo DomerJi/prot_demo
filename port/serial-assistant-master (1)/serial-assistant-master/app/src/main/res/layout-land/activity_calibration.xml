@@ -70,14 +70,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/blue"
         android:padding="6dp"
+        android:textColor="@color/blue"
         android:textSize="@dimen/textSize_small" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2">
 
@@ -324,6 +324,68 @@
                 app:layout_constraintLeft_toLeftOf="@id/bt_nod_calibration"
                 app:layout_constraintTop_toBottomOf="@id/bt_nod_calibration"
                 tools:ignore="MissingConstraints" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+
+            <TextView
+                android:id="@+id/tv_rotate_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="转身舵机"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/bt_rotate_calibration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="校准"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_rotate_title"
+                tools:ignore="MissingConstraints" />
+
+
+            <TextView
+                android:id="@+id/tv_rotate_zero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:lines="3"
+                android:text="- -"
+                android:textColor="@color/text_red"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/bt_rotate_calibration"
+                tools:ignore="MissingConstraints" />
+
+
+            <Button
+                android:id="@+id/bt_rotate_zero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/text_red"
+                android:text="转到零位"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_rotate_zero"
+                tools:ignore="MissingConstraints" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

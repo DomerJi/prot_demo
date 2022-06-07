@@ -79,7 +79,8 @@ public class Order {
                         .add("电压", 1)
                         .add("按键", 2)
                         .add("红外", 3)
-                        .add("舵机", 4);
+                        .add("舵机", 4)
+                        .add("适配器", 5);
                 options[1] = new Option("故障位")
                         .add("待定0", 0);
 
@@ -207,7 +208,8 @@ public class Order {
                         .add("电压", 1)
                         .add("按键", 2)
                         .add("红外", 3)
-                        .add("舵机角度", 4);
+                        .add("舵机角度", 4)
+                        .add("适配器", 5);;
                 break;
             case DOWN_SERVO_STATE:
                 info = "舵机控制(9字节)";

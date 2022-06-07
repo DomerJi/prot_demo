@@ -88,6 +88,14 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <provider
+            android:authorities="com.pl.sphelper"
+            android:name="com.pl.sphelper.SPContentProvider"
+            android:exported="true"
+            android:enabled="true"/>
+
+
     </application>
 
 </manifest>
