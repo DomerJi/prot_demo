@@ -79,12 +79,14 @@ public class PortTestActivity extends AppCompatActivity {
     private EditText mEtCode10;
     private EditText mEtCode11;
     private EditText mEtCode12;
+    private EditText mEtCode13;
     private Button mBtSel07;
     private Button mBtSel08;
     private Button mBtSel09;
     private Button mBtSel10;
     private Button mBtSel11;
     private Button mBtSel12;
+    private Button mBtSel13;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -139,19 +141,21 @@ public class PortTestActivity extends AppCompatActivity {
         mEtCode10 = (EditText) findViewById(R.id.et_code10);
         mEtCode11 = (EditText) findViewById(R.id.et_code11);
         mEtCode12 = (EditText) findViewById(R.id.et_code12);
+        mEtCode13 = (EditText) findViewById(R.id.et_code13);
         mBtSel07 = (Button) findViewById(R.id.bt_sel07);
         mBtSel08 = (Button) findViewById(R.id.bt_sel08);
         mBtSel09 = (Button) findViewById(R.id.bt_sel09);
         mBtSel10 = (Button) findViewById(R.id.bt_sel10);
         mBtSel11 = (Button) findViewById(R.id.bt_sel11);
         mBtSel12 = (Button) findViewById(R.id.bt_sel12);
+        mBtSel13 = (Button) findViewById(R.id.bt_sel13);
 
         mTvCodesInfo = (TextView) findViewById(R.id.tv_codes_info);
 
         editTexts = new EditText[]{mEtCode01, mEtCode02, mEtCode03, mEtCode04, mEtCode05,
-                mEtCode06, mEtCode07, mEtCode08, mEtCode09, mEtCode10, mEtCode11, mEtCode12};
+                mEtCode06, mEtCode07, mEtCode08, mEtCode09, mEtCode10, mEtCode11, mEtCode12, mEtCode13};
         btSels = new Button[]{mBtSel01, mBtSel02, mBtSel03, mBtSel04, mBtSel05,
-                mBtSel06, mBtSel07, mBtSel08, mBtSel09, mBtSel10, mBtSel11, mBtSel12};
+                mBtSel06, mBtSel07, mBtSel08, mBtSel09, mBtSel10, mBtSel11, mBtSel12, mBtSel13};
 
 
         mTvSendStatusHint = (TextView) findViewById(R.id.tv_send_status_hint);
